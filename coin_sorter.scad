@@ -564,9 +564,6 @@ mesh_thickness = 0.8;
 //
 // MAIN
 //
-// TODO:
-height = 100;
-
 othercoinsdt =
 [
 	[coin01dia, coin01th, coin01n],
@@ -594,9 +591,13 @@ coins = currency >= 0 ?
 
 echo(coins);
 
+num_coins = len(coins[0]);
+
 coin_diams = coins[0];
 coin_thicknesses = coins[1];
 coin_numbers = coins[2];
+
+coin_stack_sizes = [for(i = [0 : num_coins - 1]) coin_numbers[i] * coin_thicknesses[i]];
 
 enable_box = (part == "allassembled" || part == "allunassembled" || part == "basebox");
 enable_mesh = (pattern != "no" && pattern != "slim");
@@ -618,7 +619,6 @@ toltuberack = 0.25;
 
 guardcornerradius = 5;
 
-sorterminheight = height;
 boardthickness = 2.0; // This also implies wall thickness
 boardleftpadding = 1;
 boardrightpadding = 1;
@@ -659,6 +659,11 @@ boardlength = (boardleftpadding + boardrightpadding
 boardwidth = coin_diams[0] + coinpadding + boardthickness * 3;
 
 slopeheight = tan(boardsecondaryslope) * boardwidth + tan(boardprimaryslope) * boardlength;
+
+slope_diffs = [
+	for(i = [0 : num_coins - 1]) coin_stack_sizes[i] - tan(boardprimaryslope) * coinleftx(i)
+];
+sorterminheight = max(slope_diffs);
 
 sortermaxheight = sorterminheight + slopeheight + boardthickness;
 echo("box length:", boardlength);
