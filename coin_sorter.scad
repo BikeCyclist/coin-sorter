@@ -1,3 +1,6 @@
+/* Improved Auto Coin Sorter V8                     */
+/* - Count is a Gordian knot anyway                 */
+/*                                                  */
 /* Improved Auto Coin Sorter V7.52                  */
 /* - Rounded corners on coin rack                   */
 /* - Includes UYU Uruguayan Peso                    */
