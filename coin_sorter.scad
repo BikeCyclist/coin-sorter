@@ -1,3 +1,6 @@
+/* Improved Auto Coin Sorter V7.53                  */
+/* - Includes DEM Deutsche Mark                     */
+/*                                                  */
 /* Improved Auto Coin Sorter V7.52                  */
 /* - Rounded corners on coin rack                   */
 /* - Includes UYU Uruguayan Peso                    */
@@ -219,7 +222,7 @@
 /* [General] */
 
 // Choose a currency you use.
-currency = 8; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 32: KRW - South Korean Won, 31:MKD - Macedonian Denar, 16:MXN - Mexican Peso, 33: MYR - Malaysian Ringgit, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 30: NZD - New Zealand Dollar, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 34:UYU - Uruguayan Peso, 29:XFP - CFP Franc]
+currency = 8; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 35:DEM - Deutsche Mark, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 32: KRW - South Korean Won, 31:MKD - Macedonian Denar, 16:MXN - Mexican Peso, 33: MYR - Malaysian Ringgit, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 30: NZD - New Zealand Dollar, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 34:UYU - Uruguayan Peso, 29:XFP - CFP Franc]
 
 
 // Choose Coin Roll vs. Classic Slot Version
@@ -549,7 +552,16 @@ allcoins = [
              [ 28,    26,   23,  20],
              [  3,     2,    2,   2],
              [ 25,   25,   50,   50],
+             100],
+             
+             ["DEM",
+//             5.00   2.00   1.00   0.10   0.50   0.02   0.05   0.01
+             [29.00, 26.75, 23.50, 21.50, 20.00, 19.25, 18.50, 16.50],
+             [ 2.07,  1.79,  1.79,  1.70,  1.58,  1.52,  1.70,  1.38],
+             [   40,    50,    50,    50,    50,    50,    50,    50],
              100]
+            
+
 
              ];
 
