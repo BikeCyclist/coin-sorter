@@ -1,3 +1,21 @@
+/* Improved Auto Coin Sorter V7.41                  */
+/* - Customizer syntax error fixed                  */
+/* - Coin-roll and "classic" slot versions          */
+/* - Custom currency support re-introduced          */
+/* - New contoured back                             */
+/* - Front tube rack retaining edge                 */
+/* - Basebox can be printed upright now             */
+/* - Includes NIS Israeli New Shekel                */
+/* - Includes NOK Norwegian Krone                   */
+/* - Includes RON Romanian Leu                      */
+/* - Includes TWD New Taiwan Dollar                 */
+/* - Includes TRY Turkish Lira                      */
+/* - Includes XPF CFP Franc                         */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
+/*                                                  */
+/* Version History                                  */
+/*                                                  */
 /* Improved Auto Coin Sorter V7.3                   */
 /* - Scale placement more accurate                  */
 /* - Includes IDR Indonesian Rupiah                 */
@@ -5,12 +23,8 @@
 /* - Includes ISK Icelandic Krona                   */
 /* - Includes MXN Mexican Peso                      */
 /* - Includes SGD Singapore Dollar                  */
-/*                                                  */
 /* by Bikecyclist                                   */
 /* https://www.thingiverse.com/Bikecyclist          */
-/*                                                  */
-/* Version History                                  */
-/*                                                  */
 /* Improved Auto Coin Sorter V7.2                   */
 /* - New internal logic for coin selection          */
 /* - Includes ARS Argentine Peso                    */
@@ -22,9 +36,9 @@
 /* - Includes HKD Hong Kong Dollar                  */
 /* - Includes HUF Hungarian Forint                  */
 /* - Includes JPY Japanese Yen                      */
-/*                                                  */
 /* by Bikecyclist                                   */
 /* https://www.thingiverse.com/Bikecyclist          */
+/*                                                  */
 /* Improved Auto Coin Sorter V7.1                   */
 /* - Includes GBP British Pound                     */
 /* - Includes RUB Russian Ruble                     */
@@ -148,11 +162,40 @@
 // https://www.thingiverse.com/thing:1717615
 // by
 // https://www.thingiverse.com/miettal
+//
+// NIS
+// https://www.thingiverse.com/thing:2152362
+// by 
+// https://www.thingiverse.com/Esh_Robotics
+//
+// NOK
+// https://www.thingiverse.com/thing:1024392
+// by 
+// https://www.thingiverse.com/RolBerg
+//
+// RON
+// https://www.thingiverse.com/thing:2109232
+// by 
+// https://www.thingiverse.com/szilveszter
+//
+// TWD
+// https://www.thingiverse.com/thing:1671027
+// by 
+// https://www.thingiverse.com/osmiumtpe
+//
+// XPF
+// https://www.thingiverse.com/thing:1821933
+// by 
+// https://www.thingiverse.com/M2orea
 
 /* [General] */
 
 // Choose a currency you use.
-currency = 0; // [0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 16:MXN - Mexican Peso, 17:PEN - Peruvian Sol, 18:PLN - Polish Zloty, 19:RUB - Russian Ruble, 20:SEK - Swedish Krona, 21:SGD - Singapore Dollar, 22:THB - Thai Baht, 23:USD - US dollar]
+currency = 8; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 16:MXN - Mexican Peso, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 29:XFP - CFP Franc]
+
+
+// Choose Coin Roll vs. Classic Slot Version
+coin_roll_version = 1; // [1: Coin Roll Version, 2:Classic Slot Version]
 
 // How much height to add to the default for the shortest tube? In millimeters:
 tube_extra_height = 0; // [-100:150]
@@ -171,18 +214,88 @@ extra_guard_height = 15; // [0:30]
 // Topboard bottom rim height. (Holds topboard on.)
 topboard_rim = 15; //[10:25]
 
-// Choose a pattern for the back side.
-pattern = "mesh"; // [no:Solid with contoured back, chncoin:Chinese ancient coin pattern, mesh:Mesh pattern]
-
-// If a back side pattern is selected, should it be filled in?
-patternfill = "yes"; // [yes:filled-in back, no:open back]
-
-// Choose the desired mesh thickness. In millimeters:
-mesh_thickness = 0.8;
-
 // Which parts would you like to see?
-part = "all_unassembled"; // [all:All parts assembled, all_unassembled:All parts unassembled, basebox:Base box only,topboard:Top board only, tuberack:Tube rack only, tubes:Tubes only]
+part = "all_unassembled"; // [all_assembled:All parts assembled, all_unassembled:All parts unassembled, basebox:Base box only,topboard:Top board only, tuberack:Tube rack only, tubes:Tubes only]
 
+/* [Custom Currency] */
+
+// Enter ISO 4217 code for custom currency - see https://en.wikipedia.org/wiki/ISO_4217#Active_codes
+custom_currency_code = "ABC";
+
+// Diameter of largest coin (0 to skip this coin)
+coin_01_dia = 10.01;
+// Thickness of largest coin
+coin_01_th = 1.01;
+// Number of coins in a coin tube (for this coin)
+coin_01_n = 25;
+
+// Diameter of 2nd largest coin (0 to skip this coin)
+coin_02_dia = 9.01;
+// Thickness of this coin
+coin_02_th = 1.01;
+// Number of coins in a coin tube (for this coin)
+coin_02_n = 25;
+
+// Diameter of 3rd largest coin (0 to skip this coin)
+coin_03_dia = 8.01;
+// Thickness of this coin
+coin_03_th = 1.01;
+// Number of coins in a coin tube (for this coin)
+coin_03_n = 25;
+
+// Diameter of 4th largest coin (0 to skip this coin)
+coin_04_dia = 7.01;
+// Thickness of this coin
+coin_04_th = 1.01;
+// Number of coins in a coin tube (for this coin)
+coin_04_n = 50;
+
+// Diameter of 5th largest coin (0 to skip this coin)
+coin_05_dia = 0.00;
+// Thickness of this coin
+coin_05_th = 1.01;
+// Number of coins in a coin tube (for this coin)
+coin_05_n = 50;
+
+// Diameter of 6th largest coin (0 to skip this coin)
+coin_06_dia = 0.00;
+// Thickness of this coin
+coin_06_th = 1.01;
+// Number of coins in a coin tube (for this coin)
+coin_06_n = 50;
+
+// Diameter of 7th largest coin (0 to skip this coin)
+coin_07_dia = 0.00;
+// Thickness of this coin
+coin_07_th = 1.01;
+// Number of coins in a coin tube (for this coin)
+coin_07_n = 50;
+
+// Diameter of 8th largest coin (0 to skip this coin)
+coin_08_dia = 0.00;
+// Thickness of this coin
+coin_08_th = 1.01;
+// Number of coins in a coin tube (for this coin)
+coin_08_n = 50;
+
+// Diameter of 9th largest coin (0 to skip this coin)
+coin_09_dia = 0.00;
+// Thickness of this coin
+coin_09_th = 1.01;
+// Number of coins in a coin tube (for this coin)
+coin_09_n = 50;
+
+// Diameter of 10th largest coin (0 to skip this coin)
+coin_10_dia = 0.00;
+// Thickness of this coin
+coin_10_th = 1.01;
+// Number of coins in a coin tube (for this coin)
+coin_10_n = 50;
+
+// Enter default length of shortest tube
+default_shortest = 75;
+
+     
 /* [Hidden] */
 
 all_coins = [
@@ -292,6 +405,18 @@ all_coins = [
              [   25,    25,    50,    50,   50,   50],
              90],
              
+            ["NIS",
+             [  26,   24,   23,   22,  21.6,   18],
+             [ 1.6,  2.4,  2.2,  1.5,   2.3,  2.1],
+             [  25,   25,   25,   50,    25,   50],
+             90],
+
+            ["NOK",
+             [ 27.5,  26,  24,  21],
+             [  2.2,   2,   2, 1.7],
+             [  25,   25,  25,  50],
+             80],
+             
             ["PEN",
              [25.50, 24.38, 23.00, 22.30, 22.00, 20.50, 18.00],
              [ 1.65,  2.13,  1.26,  2.07,  1.65,  1.26,  1.26],
@@ -303,6 +428,12 @@ all_coins = [
              [ 2.00,  1.70,  2.00,  1.70,  1.40,  1.70,  1.40,  1.70,  1.40],
              [   25,    25,    25,    50,    50,    50,    50,    50,    50],
              75],
+             
+            ["RON",
+             [ 23.7,  20.35,  18.13,  16.75],
+             [ 1.82,   1.75,    1.6,   1.57],
+             [   25,     25,     25,     50],
+             80],
 
             ["RUB",
              [25.08, 23.17, 22.10, 20.56, 19.47, 17.55],
@@ -329,46 +460,113 @@ all_coins = [
              [ 2.16,  2.13,  1.48,  1.38],
              [   20,    20,    50,    50],
              70],
+             
+             // Source: Wikipedia
+            ["TRY",
+//             1.00   0.50   0.25   0.10   0.05   0.01
+             [26.15, 23.85, 20.50, 18.50, 17.50, 16.50],
+             [ 1.90,  1.90,  1.65,  1.65,  1.65,  1.35],
+             [   25,    25,    50,    50,    50,    50],
+             85],
+             
+            ["TWD",
+             [ 28,    26,   22 ,  20],
+             [ 2.4,  1.9,  1.6,  1.6],
+             [  25,   25,   50,   50],
+             85],
 
             ["USD",
 //             0.50   1.00   0.25   0.05   0.01   0.10
              [30.61, 26.50, 24.26, 21.21, 19.05, 17.91],
              [ 2.15,  2.00,  1.75,  1.95,  1.55,  1.35],
              [   20,    25,    40,    40,    50,    50],
-             75]
+             75],
+             
+            ["XFP",
+             [   33,    31,  29.89,  28.48,  27.02,  23.95,    23],
+             [ 2.37,  2.24,   1.98,   2.14,   1.76,   1.84,  1.43],
+             [   25,    25,     25,     25,     50,     50,    50],
+             80]
 
              ];
+
+echo (all_coins [currency]);
+
+//
+// Hidden Obsolescent Parameters
+//
+
+// Choose a pattern for the back side.
+pattern = "no"; // [no:Solid with contoured back, chncoin:Chinese ancient coin pattern, mesh:Mesh pattern]
+
+// If a back side pattern is selected, should it be filled in?
+patternfill = "yes"; // [yes:filled-in back, no:open back]
+
+// Choose the desired mesh thickness. In millimeters:
+mesh_thickness = 0.8;
+
 
 //
 // MAIN
 //
+height = currency>=0?
+    tube_extra_height + all_coins [currency][4]:
+    tube_extra_height + default_shortest;
 
-echo (all_coins [currency]);
 
-height = tube_extra_height + all_coins [currency][4];
+other_coins_d_t =
+[
+    [coin_01_dia, coin_01_th, coin_01_n],
+    [coin_02_dia, coin_02_th, coin_02_n],
+    [coin_03_dia, coin_03_th, coin_03_n],
+    [coin_04_dia, coin_04_th, coin_04_n],
+    [coin_05_dia, coin_05_th, coin_05_n],
+    [coin_06_dia, coin_06_th, coin_06_n],
+    [coin_07_dia, coin_07_th, coin_07_n],
+    [coin_08_dia, coin_08_th, coin_08_n],
+    [coin_09_dia, coin_09_th, coin_09_n],
+    [coin_10_dia, coin_10_th, coin_10_n]
+];
 
-coins = [all_coins [currency][1], all_coins [currency][2], all_coins [currency][3]];
+coins = currency>=0?
+    [
+        all_coins [currency][1], 
+        all_coins [currency][2], 
+        all_coins [currency][3]
+    ]
+:
+    [
+        [for (i=other_coins_d_t) if(i[0] > 0) i[0]],
+        [for (i=other_coins_d_t) if(i[0] > 0) i[1]],
+        [for (i=other_coins_d_t) if(i[0] > 0) i[2]]
+    ];
 
 coins_d = coins[0];
 coins_thickness = coins[1];
 coins_n = coins [2];
 
-enable_box = (part == "all" || part == "all_unassembled" || part == "basebox");
+enable_box = (part == "all_assembled" || part == "all_unassembled" || part == "basebox");
 enable_mesh = (pattern != "no" && pattern != "slim");
-enable_top_board = (part == "all" || part == "all_unassembled" || part == "topboard");
-enable_tubes = (part == "all" || part == "all_unassembled" || part == "tubes");
-enable_tuberack = (part == "all" || part == "all_unassembled" || part == "tuberack");
+enable_top_board = (part == "all_assembled" || part == "all_unassembled" || part == "topboard");
+enable_tubes = (part == "all_assembled" || part == "all_unassembled" || part == "tubes") && (coin_roll_version == 1);
+enable_tuberack = (part == "all_assembled" || part == "all_unassembled" || part == "tuberack");
 enable_tuberack_scale = true;
 assembled = (part != "all_unassembled");
-lay_flat = (part != "all" && part != "all_unassembled");
+lay_flat = (part != "all_assembled" && part != "all_unassembled");
 
 // Thickness of back-side fill-in (if selected)
 min_wall_thickness = 0.3;
+        
+// Thickness of tube walls
+th_tubewall = 0.5;
+        
+// Tolerance between tubes and tuberack
+tol_tuberack = 0.25;
 
 guard_corner_radius = 5;
 
 sorter_min_height = height;
-board_thickness = 2.0;
+board_thickness = 2.0; // This also implies wall thickness
 board_left_padding = 1;
 board_right_padding = 1;
 board_primary_slope = 16;
@@ -385,6 +583,9 @@ tuberack_base_thickness = 4.0;
 tuberack_back_thinner = 1;
 tuberack_scale_depth = 0.4;
 tuberack_scale_height = 0.8;
+tuberack_padding = 0.5; // Applies to tuberack retaining ledge horizontally and vertically
+tuberack_retaining_ledge_height = tuberack_base_thickness - tuberack_padding;
+
 
 unassembled_top_board_lift = 45;
 unassembled_tuberack_lift = 20;
@@ -444,7 +645,10 @@ module main_impl(top_board_lift=0, tuberack_lift=0, tubes_lift=0) {
 }
 module main_impl_flat(top_board_lift=0, tuberack_lift=0, tubes_lift=0) {
   if (enable_box) {
-    rotate([-90, 0, 0]) base_box(false);
+    if (!enable_mesh)
+        base_box(false);
+    else
+        rotate([-90, 0, 0]) base_box(false);
   }
   if (enable_top_board) {
     translate([0, 0, top_board_lift])
@@ -495,7 +699,7 @@ module base_box() {
         rotate ([90, 0, 0])
         box_empty ();
   } else {
-      box_back_fill();
+    box_back_fill();
   }
 }
 
@@ -514,7 +718,23 @@ module box_move(fatter=0, thicker=0, altitude=0, fronter=0, taller=0) {
 
 module box_empty() {
   cut_top_side() {
-    box_empty_tall();
+    difference ()
+    {
+        box_empty_tall();
+        
+        translate ([4 * board_thickness, board_thickness + 0.01, board_thickness])
+        cube ([box_size () [0] - 8 * board_thickness - board_left_padding - board_right_padding, box_size () [1], box_size() [2]]);
+    }
+
+    difference ()
+    {
+        translate ([0, -board_thickness, 0])
+        cube ([box_size ()[0], board_thickness + tuberack_front_cut_y(), tuberack_retaining_ledge_height]);
+    
+        linear_extrude(height = tuberack_retaining_ledge_height + 0.01, center=false, convexity=2)
+        offset (tuberack_padding)
+        tuberack_base_2();
+    }
   }
 }
 module box_empty_tall(fatter=0, thicker=0, altitude=0) {
@@ -549,15 +769,37 @@ module box_back_fill(thicker=0) {
     box_back_fill_tall();
   }
 }
-module box_back_fill_tall() {
-  linear_extrude(height=sorter_max_height, center=false, convexity=8)
-  translate([0, coin_padding*2])
-  difference() {
-    polygon(tuberack_cut_back_complete());
-    for (i = [0 : coin_max_index]) {
-      coin_hole_plain(i);
+module box_back_fill_tall(wall_only = true) 
+{
+    linear_extrude(height=sorter_max_height, center=false, convexity=8)
+    translate([0, coin_padding*2])
+    if (wall_only)
+    {
+        intersection ()
+        {
+            offset (board_thickness)
+            difference ()
+            {
+                square ([box_size() [0], box_size () [1] - board_thickness - coin_padding * 2 - 0.01]);
+                
+                tuberack_back_contour ();
+            }
+            
+            tuberack_back_contour ();
+        }
     }
-  }
+    else
+        tuberack_back_contour ();
+}
+
+module tuberack_back_contour ()
+{
+    difference() 
+    {
+        polygon(tuberack_cut_back_complete());
+        for (i = [0 : coin_max_index])
+            coin_hole_plain(i);
+    }
 }
 
 // Transformation: cut the right, left, back and front side.
@@ -872,28 +1114,24 @@ module slope_cut_for_coin(n, bigger_r=0) {
 //
 
 // Component: the tuberack.
-module tuberack() {
-  linear_extrude(height=tuberack_base_thickness+0.01, center=false, convexity=2) {
+module tuberack() 
+{
+    linear_extrude(height=tuberack_base_thickness+0.01, center=false, convexity=2) 
     tuberack_base_2();
-  }
-  difference() {
-    translate([0, 0, tuberack_base_thickness]) {
-
-      tuberack_body_3();
-    }
-
-    if (enable_tuberack_scale) {
-      translate([0, 0, tuberack_base_thickness + 1.5]) // +1.5 compensates for tube bottom thickness
-      {
-        tuberack_scales();
-      }
-    }
-    translate([0, -1, sorter_min_height - tuberack_shorter]) {
-      rotate([0, -board_primary_slope, 0]) {
+    
+    difference() 
+    {
+        translate([0, 0, tuberack_base_thickness]) 
+        tuberack_body_3();
+        
+        if (enable_tuberack_scale) 
+            translate([0, 0, tuberack_base_thickness + 1.5]) // +1.5 compensates for tube bottom thickness
+            tuberack_scales();
+        
+        translate([0, -1, sorter_min_height - tuberack_shorter]) 
+        rotate([0, -board_primary_slope, 0]) 
         cube([board_length * 2, board_width * 2, sorter_max_height]);
-      }
     }
-  }
 }
 
 // Submodule: the "last coins" and the tube connecting part.
@@ -909,20 +1147,24 @@ module tuberack_base_2() {
 }
 
 // Submodule: the tube connecting part subtracted by coin holes.
-module tuberack_base_3() {
-  difference() {
-    tuberack_base_2();
-    for (i = [0 : coin_max_index]) {
-      offset (0.75)
-      coin_hole_plain(i);
+module tuberack_base_3() 
+{
+    difference() 
+    {
+        tuberack_base_2();
+        for (i = [0 : coin_max_index])
+            if (coin_roll_version == 1)
+                offset (th_tubewall + tol_tuberack)
+                coin_hole_plain(i);
+            else
+                coin_hole_plain(i);
     }
-  }
 }
 
-module tuberack_body_3() {
-  linear_extrude(height=sorter_max_height, center=false, convexity=2) {
-    tuberack_base_3();
-  }
+module tuberack_body_3() 
+{
+    linear_extrude(height=sorter_max_height, center=false, convexity=2)
+            tuberack_base_3();
 }
 
 module tuberack_scales() {
@@ -991,7 +1233,7 @@ module make_coin_tube (d_coin, h_coin, n_coins) {
             translate ([0, 0, -1])
             cylinder (d = d_coin, h = 0.5 + (n_coins + 0.5) * h_coin);
             
-            cylinder (d = 1 + d_coin, h = 0.5 + (n_coins + 0.5) * h_coin);
+            cylinder (d = 2 * th_tubewall + d_coin, h = 0.5 + (n_coins + 0.5) * h_coin);
         }
         
         translate ([0, 0, 0.5])
@@ -1057,7 +1299,7 @@ function tuberack_cut_back_complete() =
   concat([[tuberack_left_x()+tuberack_back_thinner, tuberack_back_y()]],
          tuberack_cut_back_xys(),
          [[tuberack_right_x()-tuberack_back_thinner, tuberack_back_y()]]);
-
+         
 // Tube connections.
 function tuberack_height_at(x) =
   sorter_min_height - tuberack_shorter - tuberack_base_thickness
