@@ -1,22 +1,38 @@
+/* Improved Auto Coin Sorter V7.54                  */
+/* - Includes COP Columbian Peso                    */
+/* - Coin tube spacing slightly increased           */
+/* - Default extra topboard length decreased        */
+/* - Slight correction of US 1 Cent coin thickness  */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
+/*                                                  */
+/* Version History                                  */
+/*                                                  */
 /* Improved Auto Coin Sorter V7.53b                 */
 /* - Cleaned up some redundant parameters           */
 /* - Introduced new parameter for back wall height  */
 /* - Includes DEM Deutsche Mark                     */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
 /*                                                  */
 /* Improved Auto Coin Sorter V7.52                  */
 /* - Rounded corners on coin rack                   */
 /* - Includes UYU Uruguayan Peso                    */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
 /*                                                  */
 /* Improved Auto Coin Sorter V7.51                  */
 /* - Test to check customizer's underscore handling */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
 /*                                                  */
 /* Improved Auto Coin Sorter V7.5                   */
 /* - Includes KRW South Korean Won                  */
 /* - Includes MKD Macedonian Denar                  */
 /* - Includes MYR Malaysian Ringgit                 */
 /* - Includes NZD New Zealand Dollar                */
-/*                                                  */
-/* Version History                                  */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
 /*                                                  */
 /* Improved Auto Coin Sorter V7.41                  */
 /* - Customizer syntax error fixed                  */
@@ -224,7 +240,7 @@
 /* [General] */
 
 // Choose a currency you use.
-currency = 8; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 35:DEM - Deutsche Mark, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 32: KRW - South Korean Won, 31:MKD - Macedonian Denar, 16:MXN - Mexican Peso, 33: MYR - Malaysian Ringgit, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 30: NZD - New Zealand Dollar, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 34:UYU - Uruguayan Peso, 29:XFP - CFP Franc]
+currency = 8; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 36:COP - Columbian Peso, 6:CZK - Czech Koruna, 35:DEM - Deutsche Mark, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 32: KRW - South Korean Won, 31:MKD - Macedonian Denar, 16:MXN - Mexican Peso, 33: MYR - Malaysian Ringgit, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 30: NZD - New Zealand Dollar, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 34:UYU - Uruguayan Peso, 29:XFP - CFP Franc]
 
 
 // Choose Coin Roll vs. Classic Slot Version
@@ -234,7 +250,7 @@ CoinRollVersion = 1; // [1: Coin Roll Version, 2:Classic Slot Version]
 TubeExtraHeight = 0; // [-100:150]
 
 // How much extra topboard length for placing the coins on the sorter? (In percent of the total topboard length.):
-extratopboardlengthpct = 14; // [0:30]
+extratopboardlengthpct = 12; // [0:30]
 
 extratopboardlength = extratopboardlengthpct * 0.01;
 
@@ -333,7 +349,6 @@ defaultshortest = 75;
 
 // Enter extra clearance of basebox back wall
 baseboxbackclearance = 5;
-
    
 /* [Hidden] */
 
@@ -514,10 +529,11 @@ allcoins = [
              [  25,   25,   50,   50],
              85],
 
+//          https://www.usmint.gov/learn/coin-and-medal-programs/coin-specifications
             ["USD",
 //             0.50   1.00   0.25   0.05   0.01   0.10
-             [30.61, 26.50, 24.26, 21.21, 19.05, 17.91],
-             [ 2.15,  2.00,  1.75,  1.95,  1.55,  1.35],
+             [30.61, 26.49, 24.26, 21.21, 19.05, 17.91],
+             [ 2.15,  2.00,  1.75,  1.95,  1.52,  1.35],
              [   20,    25,    40,    40,    50,    50],
              75],
              
@@ -557,14 +573,23 @@ allcoins = [
              [ 28,    26,   23,  20],
              [  3,     2,    2,   2],
              [ 25,   25,   50,   50],
-             100]
+             100],
 
              ["DEM",
 //             5.00   2.00   1.00   0.10   0.50   0.02   0.05   0.01
              [29.00, 26.75, 23.50, 21.50, 20.00, 19.25, 18.50, 16.50],
              [ 2.07,  1.79,  1.79,  1.70,  1.58,  1.52,  1.70,  1.38],
              [   40,    50,    50,    50,    50,    50,    50,    50],
-             100]
+             100],
+             
+             // Source: Wikipedia, Coins since 2012
+             // (No thickness for 1000 Peso coin given)
+             ["COP",
+//             1000   500   200   100    50
+             [ 26.7, 23.7, 22.4, 20.3 , 17.0],
+             [  2  ,  2.0,  1.7,  1.55,  1.3],
+             [   25,   25,   50,   50,    50],
+             90]
              ];
 
 echo (allcoins [currency]);
@@ -650,6 +675,7 @@ boardprimaryslope = 16;
 boardsecondaryslope = 15;
 horizontalguardwidth = 3;
 coinpadding = 0.4;
+tubepadding = 4;
 coinpaddingtopboard = 0.25;
 nozzlesize = 0.4;
 nozzlesizeupbound = 0.41;
@@ -1251,7 +1277,7 @@ module tuberackscales() {
     render(convexity=2) {
       interval = (coinsthickness[i] > 1.5 ? 1 : 2);
       for (j = [interval : interval : sortermaxheight/coinsthickness[i]]) {
-        translate([coincenterx(i),
+        translate([coincenterx(i) + toltuberack,
                    tuberackfrontcuty() - 1,
                    j * coinsthickness[i] - tuberackscaleheight / 2]) {
           lengthoffset = (j%10==0 ? 3 : j%2==0 ? 1 : -0.5);
@@ -1316,7 +1342,7 @@ module makecointube (dcoin, hcoin, ncoins) {
         }
         
         translate ([0, 0, 0.5])
-            cylinder (d = dcoin, h = 0.5 + (ncoins + 0.5) * hcoin + 0.01);
+            cylinder (d = dcoin, h = (ncoins + 0.5) * hcoin + 0.01);
     }
 }
 
@@ -1328,7 +1354,7 @@ module makecointube (dcoin, hcoin, ncoins) {
 // Accumulated coins' diameters.
 function sumcoinsd(firstn=coincount) =
   firstn <= 0 ? 0 :
-  coinsd[firstn - 1] + sumcoinsd(firstn - 1);
+  coinsd[firstn - 1] + sumcoinsd(firstn - 1) + 2 * toltuberack;
 
 // Coin positions.
 function coincenterx(n) =
