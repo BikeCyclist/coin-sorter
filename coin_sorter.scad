@@ -1,4 +1,15 @@
+/* Improved Auto Coin Sorter V7.1                   */
+/* - Includes GBP British Pound                     */
+/* - Includes RUB Russian Ruble                     */
+/* - Unused "other" option removed from selection   */
+/*                                                  */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
+/*                                                  */
+/* Version History                                  */
+/*                                                  */
 /* Improved Auto Coin Sorter V7                     */
+/* https://www.thingiverse.com/thing:3467834        */
 /* - Includes Features from Compact Version         */
 /* - Coin roll support looks at more details        */
 /* - Coin tube base chamfered (anti-elephant)       */
@@ -8,14 +19,13 @@
 /* - Increased topboard rim height                  */
 /* - Extra height for right end of vertical guard   */
 /* - Support for "other coins" dropped              */
-/* https://www.thingiverse.com/thing:3467834        */
 /* by Bikecyclist                                   */
 /* https://www.thingiverse.com/Bikecyclist          */
 /*                                                  */
-/* Version History                                  */
-/*                                                  */
 /* Improved Auto Coin Sorter V6                     */
 /* - Interim version, never released                */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
 /*                                                  */
 /* Improved Auto Coin Sorter V5                     */
 /* https://www.thingiverse.com/thing:3421345        */
@@ -42,6 +52,11 @@
 /* by Bikecyclist                                   */
 /* https://www.thingiverse.com/Bikecyclist          */
 /*                                                  */
+/* Coin sorter for UK coins (inc new £1)            */
+/* https://www.thingiverse.com/thing:2498200        */
+/* by mabbog                                        */
+/* https://www.thingiverse.com/mabbog               */
+/*                                                  */
 /* Auto Coin Sorter for All Currencies              */
 /* https://www.thingiverse.com/thing:499177         */
 /* by Youngcat                                      */
@@ -50,7 +65,7 @@
 /* [General] */
 
 // Choose a currency you use.
-currency = "eur"; // [usd:USD - US dollar, eur:EUR - Euro, cad:CAD - Canadian dollar, chf:CHF - Swiss franc, pen:PEN - Peruvian Sol, pln:PLN - Polish Zloty, sek:SEK - Swedish Krona, thb:THB - Thai Baht, other:Other (See "Slot customization" tab)]
+currency = "eur"; // [usd:USD - US dollar, eur:EUR - Euro, cad:CAD - Canadian dollar, chf:CHF - Swiss franc, gbp:GBP - British Pounds, pen:PEN - Peruvian Sol, pln:PLN - Polish Zloty, rub:RUB - Russian Ruble, sek:SEK - Swedish Krona, thb:THB - Thai Baht]
 
 // How much height to add to the default for the shortest tube? In millimeters:
 tube_extra_height = 0; // [-100:150]
@@ -87,32 +102,40 @@ part = "all_unassembled"; // [all:All parts assembled, all_unassembled:All parts
 eur_coins = [[25.75, 24.25, 23.25, 22.25, 21.25, 19.75, 18.75, 16.25],
              [ 2.20,  2.38,  2.33,  2.14,  1.67,  1.93,  1.67,  1.67],
              [   25,    20,    25,    40,    50,    40,    50,    50]];
-             
+
 //             0.50   1.00   0.25   0.05   0.01   0.10
 usd_coins = [[30.61, 26.50, 24.26, 21.21, 19.05, 17.91],
              [ 2.15,  2.00,  1.75,  1.95,  1.55,  1.35],
              [   20,    25,    40,    40,    50,    50]];
-             
+
+gbp_coins = [[28.5,	27.5, 25.9, 24.5, 23.5, 21.4, 20.3, 18.0],
+              [2.5, 1.78, 2.03, 1.85, 3.15,  1.7, 1.65, 1.70],
+              [ 25,   25,   25,   50,   25,   50,   50,   50]];
+
 cad_coins = [[28.00, 27.13, 26.50, 23.88, 21.20, 19.05, 18.03],
              [ 1.80,  1.95,  1.75,  1.58,  1.76,  1.45,  1.22],
              [   25,    25,    50,    50,    50,    50,    50]];
-             
+
 chf_coins = [[31.45, 27.40, 23.20, 21.05, 19.15, 18.20, 17.15],
              [ 2.35,  2.15,  1.15,  1.65,  1.45,  1.25,  1.25],
              [   25,    25,    50,    50,    50,    50,    50]];
-             
+
 pen_coins = [[25.50, 24.38, 23.00, 22.30, 22.00, 20.50, 18.00],
              [ 1.65,  2.13,  1.26,  2.07,  1.65,  1.26,  1.26],
              [   25,    25,    50,    50,    50,    50,    50]];
-             
+
 pln_coins = [[24.00, 23.00, 21.50, 20.50, 19.50, 18.50, 17.50, 16.50, 15.50],
              [ 2.00,  1.70,  2.00,  1.70,  1.40,  1.70,  1.40,  1.70,  1.40],
              [   25,    25,    25,    50,    50,    50,    50,    50,    50]];
-             
+
+rub_coins = [[25.08, 23.17, 22.10, 20.56, 19.47, 17.55],
+             [ 1.90,  1.84,  2.25,  1.40,  1.45,  1.23],
+             [   25,    25,    25,    50,    50,    50]];
+
 sek_coins = [[23.75, 22.50, 20.50, 19.50],
              [ 1.97,  1.79,  1.79,  2.90],
              [   25,    25,    25,    25]];
-             
+
 thb_coins = [[26.00, 24.05, 22.05, 20.01],
              [ 2.16,  2.13,  1.48,  1.38],
              [   20,    20,    50,    50]];
@@ -120,12 +143,13 @@ thb_coins = [[26.00, 24.05, 22.05, 20.01],
 //
 // MAIN
 //
-               
+
 height = tube_extra_height +
         currency == "usd" ? 75 :
         currency == "eur" ? 80 :
-        currency == "chf" ? 70 :
         currency == "cad" ? 80 :
+        currency == "chf" ? 70 :
+        currency == "gbp" ? 90 :
         currency == "pen" ? 90 :
         currency == "pln" ? 75 :
         currency == "sek" ? 70 :
@@ -133,10 +157,12 @@ height = tube_extra_height +
 
 coins = currency == "usd" ? usd_coins :
         currency == "eur" ? eur_coins :
-        currency == "chf" ? chf_coins :
         currency == "cad" ? cad_coins :
+        currency == "chf" ? chf_coins :
+        currency == "gbp" ? gbp_coins :
         currency == "pen" ? pen_coins :
         currency == "pln" ? pln_coins :
+        currency == "rub" ? rub_coins :
         currency == "sek" ? sek_coins :
         currency == "thb" ? thb_coins : eur_coins;
 
