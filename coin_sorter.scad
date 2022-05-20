@@ -1,3 +1,11 @@
+/* Improved Auto Coin Sorter V7.5                   */
+/* - Includes KRW South Korean Won                  */
+/* - Includes MKD Macedonian Denar                  */
+/* - Includes MYR Malaysian Ringgit                 */
+/* - Includes NZD New Zealand Dollar                */
+/*                                                  */
+/* Version History                                  */
+/*                                                  */
 /* Improved Auto Coin Sorter V7.41                  */
 /* - Customizer syntax error fixed                  */
 /* - Coin-roll and "classic" slot versions          */
@@ -13,8 +21,6 @@
 /* - Includes XPF CFP Franc                         */
 /* by Bikecyclist                                   */
 /* https://www.thingiverse.com/Bikecyclist          */
-/*                                                  */
-/* Version History                                  */
 /*                                                  */
 /* Improved Auto Coin Sorter V7.3                   */
 /* - Scale placement more accurate                  */
@@ -163,6 +169,21 @@
 // by
 // https://www.thingiverse.com/miettal
 //
+// KRW
+// https://www.thingiverse.com/thing:3557926
+// by 
+// https://www.thingiverse.com/alien9519
+//
+// MKD
+// https://www.thingiverse.com/thing:3552088
+// by 
+// https://www.thingiverse.com/Karevski
+//
+// MYR
+// https://www.thingiverse.com/make:643395
+// by 
+// https://www.thingiverse.com/wmfhadi
+//
 // NIS
 // https://www.thingiverse.com/thing:2152362
 // by 
@@ -191,11 +212,11 @@
 /* [General] */
 
 // Choose a currency you use.
-currency = undef; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 16:MXN - Mexican Peso, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 29:XFP - CFP Franc]
+currency = 8; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 32: KRW - South Korean Won, 31:MKD - Macedonian Denar, 16:MXN - Mexican Peso, 33: MYR - Malaysian Ringgit, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 30: NZD - New Zealand Dollar, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 29:XFP - CFP Franc]
 
 
 // Choose Coin Roll vs. Classic Slot Version
-coin_roll_version = 2; // [1: Coin Roll Version, 2:Classic Slot Version]
+coin_roll_version = 1; // [1: Coin Roll Version, 2:Classic Slot Version]
 
 // How much height to add to the default for the shortest tube? In millimeters:
 tube_extra_height = 0; // [-100:150]
@@ -215,12 +236,7 @@ extra_guard_height = 15; // [0:30]
 topboard_rim = 15; //[10:25]
 
 // Which parts would you like to see?
-
-partno = undef;
-
-parts = ["all_unassembled", "basebox", "topboard", "tuberack", "tubes"];
-
-part = parts [partno]; 
+part = "all_unassembled"; // [all_assembled:All parts assembled, all_unassembled:All parts unassembled, basebox:Base box only,topboard:Top board only, tuberack:Tube rack only, tubes:Tubes only]
 
 /* [Custom Currency] */
 
@@ -491,7 +507,33 @@ all_coins = [
              [   33,    31,  29.89,  28.48,  27.02,  23.95,    23],
              [ 2.37,  2.24,   1.98,   2.14,   1.76,   1.84,  1.43],
              [   25,    25,     25,     25,     50,     50,    50],
-             80]
+             80],
+             
+             // Source: Wikipedia
+             ["NZD",
+//              200     50    100     20     10
+             [26.50, 24.75, 23.00, 21.75, 20.50],
+             [ 2.70,  1.70,  2.74,  1.56,  1.58],
+             [   25,    25,    25,    50,    50],
+             90],
+             
+             ["MKD",
+             [27.50, 26.70, 25.50, 24.58, 23.90],
+             [ 1.80,  1.90,  1.80,  2.07,  1.78],
+             [   25,    25,    25,    25,    50],
+             80],
+             
+             ["KRW",
+             [27.00, 24.50, 22.00, 18.50],
+             [ 1.92,  1.75,  1.60,  1.60],
+             [   25,    25,    50,    50],
+             85],
+             
+             ["MYR",
+             [27.76, 23.59, 22.65, 20.60, 19.40, 18.80,  17.78],
+             [ 2.18,  1.75,  1.92,  1.75,  1.37,  1.50,   1.30],
+             [   25,    25,    25,    50,    50,    50,     50],
+             85]
 
              ];
 
