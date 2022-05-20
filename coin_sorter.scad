@@ -1,5 +1,27 @@
-/* Improved Auto Coin Sorter V8                     */
-/* - Count is a Gordian knot anyway                 */
+/* Improved Auto Coin Sorter V8.01                  */
+/* - Merged V7.61R and V8                           */
+/*                                                  */
+/* Version History                                  */
+/*                                                  */
+/* Improved Auto Coin Sorter V7.61R                 */
+/* - Topboard flanks are now vertical               */
+/* - Better placement of rear guard rail            */
+/* - Topboard has ribs to hold tuberack in place    */
+/*                                                  */
+/* Improved Auto Coin Sorter V7.54                  */
+/* - Includes COP Columbian Peso                    */
+/* - Coin tube spacing slightly increased           */
+/* - Default extra topboard length decreased        */
+/* - Slight correction of US 1 Cent coin thickness  */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
+/*                                                  */
+/* Improved Auto Coin Sorter V7.53b                 */
+/* - Cleaned up some redundant parameters           */
+/* - Introduced new parameter for back wall height  */
+/* - Includes DEM Deutsche Mark                     */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
 /*                                                  */
 /* Improved Auto Coin Sorter V7.52                  */
 /* - Rounded corners on coin rack                   */
@@ -147,7 +169,7 @@
 // CZK
 // https://www.thingiverse.com/thing:1616408
 // by
-// https://www.thingiverse.com/TomasHalbych
+// https://www.thingiverse.com/Tomas_Halbych
 //
 // DKK
 // https://www.thingiverse.com/thing:1032447
@@ -197,7 +219,7 @@
 // NIS
 // https://www.thingiverse.com/thing:2152362
 // by
-// https://www.thingiverse.com/EshRobotics
+// https://www.thingiverse.com/Esh_Robotics
 //
 // NOK
 // https://www.thingiverse.com/thing:1024392
@@ -222,15 +244,13 @@
 /* [General] */
 
 // Choose a currency you use.
-currency = 1; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 32: KRW - South Korean Won, 31:MKD - Macedonian Denar, 16:MXN - Mexican Peso, 33: MYR - Malaysian Ringgit, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 30: NZD - New Zealand Dollar, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 34:UYU - Uruguayan Peso, 29:XFP - CFP Franc]
+currency = 8; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 36:COP - Columbian Peso, 6:CZK - Czech Koruna, 35:DEM - Deutsche Mark, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 32: KRW - South Korean Won, 31:MKD - Macedonian Denar, 16:MXN - Mexican Peso, 33: MYR - Malaysian Ringgit, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 30: NZD - New Zealand Dollar, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 34:UYU - Uruguayan Peso, 29:XFP - CFP Franc]
 
 // Choose Coin Roll vs. Classic Slot Version
 coin_roll_version = 1; // [1: Coin Roll Version, 2:Classic Slot Version]
 
-// How much extra topboard length for placing the coins on the sorter? (In percent of the total topboard length.):
-extra_topboard_length_percent = 14; // [0:30]
-
-extra_topboard_length = extra_topboard_length_percent * 0.01;
+// How much extra topboard length for placing the coins on the sorter? (In millimeters.):
+extra_topboard_length = 30; // [0:60]
 
 // Style of vertical guard
 guardstyle = "Frontandback";  // [Frontandback:Front and back guard rails, Frontguard: Front guard rail only]
@@ -240,6 +260,9 @@ extra_guard_height = 15; // [0:30]
 
 // Topboard bottom rim height. (Holds topboard on.)
 topboard_rim = 15; //[10:25]
+
+// Topboard bottom rim width.
+topboardrimwidth = 5; //[2:10]
 
 // Offset value used for rounding tube rack corners (normally no need to change)
 roundoffset = 1; // [0:2]
@@ -544,7 +567,23 @@ allcoins = [
 		[ 28, 26, 23, 20],
 		[  3,  2,  2,  2],
 		[ 25, 25, 50, 50],
-	]
+	],
+    
+    ["DEM",
+//        5.00   2.00   1.00   0.10   0.50   0.02   0.05   0.01
+        [29.00, 26.75, 23.50, 21.50, 20.00, 19.25, 18.50, 16.50],
+        [ 2.07,  1.79,  1.79,  1.70,  1.58,  1.52,  1.70,  1.38],
+        [   40,    50,    50,    50,    50,    50,    50,    50],
+    ],
+
+ // Source: Wikipedia, Coins since 2012
+ // (No thickness for 1000 Peso coin given)
+     ["COP",
+//     1000   500   200   100    50
+     [ 26.7, 23.7, 22.4, 20.3 , 17.0],
+     [  2  ,  2.0,  1.7,  1.55,  1.3],
+     [   25,   25,   50,   50,    50],
+    ]
 ];
 
 sqrt2 = sqrt(2);
@@ -923,70 +962,75 @@ module boardbackmeshancientcoins(thickness, radius, count, center = [0, 0, 0], n
 //
 
 // Component: the solid board on top (topboard)
+
 module topboard() {
-	difference() {
-		// the board itself
-		union() {
-			cutsides() {
-				transformtopboard(sorterminheight) {
-					cube([boardlength * 2, boardwidth * 2, boardthickness]);
-				}
-			}
+  difference() 
+    {
+    // the board itself
+    union ()
+    {
+        topboard_blank ();
 
-			difference () {
-				transformtopboard(sorterminheight) {
-					translate([0, 0, -topboard_rim
-				 + boardthickness - 0.01]) {
-						linear_extrude(topboard_rim
-					) {
-							offset(topboard_rim
-						/2) {
-								scale([1.05 + extra_topboard_length, 1.05, 1]) {
-									projection(cut = false) {
-										cutsides() {
-											transformtopboard(sorterminheight) {
-												cube([boardlength * 2, boardwidth * 2, boardthickness]);
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
+        difference ()
+        {
 
-				cutsides() {
-					transformtopboard(sorterminheight) {
-						cube([boardlength * 2, boardwidth * 2, boardthickness]);
-					}
-				}
+            translate ([0, 0, -topboard_rim + boardthickness - 0.01])
+            hull ()
+            for (i = [0:1])
+                translate ([0, 0, i * topboard_rim])
+                transformtopboard(sorterminheight)
+                linear_extrude (0.01)
+                offset (topboardrimwidth)
+                square ([(boxsize() [0] + extra_topboard_length) / cos (boardprimaryslope), boxsize () [1]]);
 
-				topboardbottomcutout();
-			}
-		}
+            difference() {
+                topboardbottomcutout ();
 
-		// holes and cuts
-		for (i = [0 : coinmaxindex]) {
-			coinhole(i, biggerr = coinpaddingtopboard - coinpadding);
-			slopecutforcoin(i, biggerr = coinpaddingtopboard - coinpadding);
-		}
-	}
+                coinmaxindex = coincount - 1;
 
-	difference() {
-		union() {
-			verticalguard();
+                for (i = [0 : coinmaxindex - 1]) {
+                    translate([coinleftx(i) + coin_diams[i], -10, sorterminheight - topboard_rim])
+                        cube([2 * coinpadding + boardthickness, 10 + tuberackfrontcuty(), sortermaxheight]);
+                }
+            }
+            transformtopboard(sorterminheight)
+                translate([0.5 * coin_diams[0], -0.5, -topboard_rim + boardthickness])
+                    rotate([-45, 0, 0])
+                        cube([coinleftx(coinmaxindex), topboard_rim - boardthickness, topboard_rim - boardthickness]);
+        }
+    }
 
-			if (guardstyle == "Frontandback") {
-				translate([0, boardwidth, boardwidth * sin (boardsecondaryslope)]) {
-					verticalguard();
-				}
-			}
-		}
+    // holes and cuts
+    for (i = [0 : coinmaxindex]) 
+    {
+        coinhole(i, biggerr=coinpaddingtopboard-coinpadding);
 
-		topboardbottomcutout();
-	}
+        slopecutforcoin(i, biggerr=coinpaddingtopboard-coinpadding);
+    }
+  }
 
-	horizontalguard();
+  difference ()
+  {
+    union ()
+    {
+        verticalguard();
+
+        if (guardstyle == "Frontandback")
+            transformtopboard(0)
+            translate ([0, boardwidth, 0])
+            untransformtopboard(0)
+            verticalguard();
+    }
+    topboardbottomcutout ();
+  }
+  horizontalguard();
+}
+
+module topboard_blank ()
+{
+    cutsides()
+    transformtopboard(sorterminheight)
+    cube([boardlength*2, boardwidth*2, boardthickness]);
 }
 
 // Negative component: Basebox - sized hole in topboard bottom
@@ -1011,7 +1055,7 @@ module verticalguard() {
 								rotate([90, 0, 0]) {
 									difference() {
 										intersection() {
-											cube([boardlength * (1 + extra_topboard_length), boardthickness, sortermaxheight * 2]);
+											cube([boardlength + extra_topboard_length, boardthickness, sortermaxheight * 2]);
 
 											topside(sorterminheight + boardthickness - 0.1);
 										}
@@ -1065,7 +1109,7 @@ module topverticalguard(altitude = 0, righthandaltitude = 0) {
 				translate([0.8 * boardlength, 0, 0])
 				cube([0.01, boardwidth * 2, sortermaxheight]);
 
-				translate([2 * (1 + extra_topboard_length) * boardlength, 0, 2 * righthandaltitude])
+				translate([2 * (boardlength + extra_topboard_length), 0, 2 * righthandaltitude])
 				cube([0.01, boardwidth * 2, sortermaxheight]);
 			}
 		}
