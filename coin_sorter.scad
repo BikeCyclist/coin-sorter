@@ -1,3 +1,7 @@
+/* Improved Auto Coin Sorter V7.52                  */
+/* - Rounded corners on coin rack                   */
+/* - Includes UYU Uruguayan Peso                    */
+/*                                                  */
 /* Improved Auto Coin Sorter V7.51                  */
 /* - Test to check customizer's underscore handling */
 /*                                                  */
@@ -215,7 +219,7 @@
 /* [General] */
 
 // Choose a currency you use.
-currency = 8; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 32: KRW - South Korean Won, 31:MKD - Macedonian Denar, 16:MXN - Mexican Peso, 33: MYR - Malaysian Ringgit, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 30: NZD - New Zealand Dollar, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 29:XFP - CFP Franc]
+currency = 8; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 32: KRW - South Korean Won, 31:MKD - Macedonian Denar, 16:MXN - Mexican Peso, 33: MYR - Malaysian Ringgit, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 30: NZD - New Zealand Dollar, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 34:UYU - Uruguayan Peso, 29:XFP - CFP Franc]
 
 
 // Choose Coin Roll vs. Classic Slot Version
@@ -237,6 +241,9 @@ extraguardheight = 15; // [0:30]
 
 // Topboard bottom rim height. (Holds topboard on.)
 topboardrim = 15; //[10:25]
+
+// Offset value used for rounding tube rack corners (normally no need to change)
+roundoffset = 1; // [0:2]
 
 // Which parts would you like to see?
 part = "allunassembled"; // [allassembled:All parts assembled, allunassembled:All parts unassembled, basebox:Base box only,topboard:Top board only, tuberack:Tube rack only, tubes:Tubes only]
@@ -319,7 +326,7 @@ coin10n = 50;
 // Enter default length of shortest tube
 defaultshortest = 75;
 
-     
+   
 /* [Hidden] */
 
 allcoins = [
@@ -500,11 +507,11 @@ allcoins = [
              85],
 
             ["USD",
-//             0.25   0.05   0.01   0.10
-             [24.26, 21.21, 19.05, 17.91],
-             [1.75,  1.95,  1.55,  1.35],
-             [40,    40,    50,    50],
-             90],
+//             0.50   1.00   0.25   0.05   0.01   0.10
+             [30.61, 26.50, 24.26, 21.21, 19.05, 17.91],
+             [ 2.15,  2.00,  1.75,  1.95,  1.55,  1.35],
+             [   20,    25,    40,    40,    50,    50],
+             75],
              
             ["XFP",
              [   33,    31,  29.89,  28.48,  27.02,  23.95,    23],
@@ -536,7 +543,13 @@ allcoins = [
              [27.76, 23.59, 22.65, 20.60, 19.40, 18.80,  17.78],
              [ 2.18,  1.75,  1.92,  1.75,  1.37,  1.50,   1.30],
              [   25,    25,    25,    50,    50,    50,     50],
-             85]
+             85],
+             
+             ["UYU",
+             [ 28,    26,   23,  20],
+             [  3,     2,    2,   2],
+             [ 25,   25,   50,   50],
+             100]
 
              ];
 
@@ -1166,9 +1179,7 @@ module slopecutforcoin(n, biggerr=0) {
 // Component: the tuberack.
 module tuberack() 
 {
-    !linear_extrude(height=tuberackbasethickness+0.01, center=false, convexity=2) 
-    offset (0.5)
-    offset (-0.5)
+    linear_extrude(height=tuberackbasethickness+0.01, center=false, convexity=2) 
     tuberackbase2();
     
     difference() 
@@ -1188,6 +1199,8 @@ module tuberack()
 
 // Submodule: the "last coins" and the tube connecting part.
 module tuberackbase2() {
+  offset (roundoffset)
+  offset (-roundoffset)
   polygon(concat(
       [[tuberackcutxx(0)[0], tuberackfrontcuty()],
        [tuberackleftx(), tuberackfronty()],
