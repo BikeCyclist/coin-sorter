@@ -500,11 +500,11 @@ allcoins = [
              85],
 
             ["USD",
-//             0.50   1.00   0.25   0.05   0.01   0.10
-             [30.61, 26.50, 24.26, 21.21, 19.05, 17.91],
-             [ 2.15,  2.00,  1.75,  1.95,  1.55,  1.35],
-             [   20,    25,    40,    40,    50,    50],
-             75],
+//             0.25   0.05   0.01   0.10
+             [24.26, 21.21, 19.05, 17.91],
+             [1.75,  1.95,  1.55,  1.35],
+             [40,    40,    50,    50],
+             90],
              
             ["XFP",
              [   33,    31,  29.89,  28.48,  27.02,  23.95,    23],
@@ -1166,7 +1166,9 @@ module slopecutforcoin(n, biggerr=0) {
 // Component: the tuberack.
 module tuberack() 
 {
-    linear_extrude(height=tuberackbasethickness+0.01, center=false, convexity=2) 
+    !linear_extrude(height=tuberackbasethickness+0.01, center=false, convexity=2) 
+    offset (0.5)
+    offset (-0.5)
     tuberackbase2();
     
     difference() 
