@@ -1,5 +1,7 @@
-/* Improved Auto Coin Sorter V7.6R                  */
+/* Improved Auto Coin Sorter V7.61R                 */
 /* - Topboard flanks are now vertical               */
+/* - Better placement of rear guard rail            */
+/* - Topboard has ribs to hold tuberack in place    */
 /*                                                  */
 /* Version History                                  */
 /*                                                  */
@@ -1027,7 +1029,20 @@ module topboard() {
                 offset (topboardrimwidth)
                 square ([(boxsize() [0] + extratopboardlength) / cos (boardprimaryslope), boxsize () [1]]);
                         
-            topboardbottomcutout ();
+            difference() {
+                topboardbottomcutout ();
+                
+                coinmaxindex = coincount - 1;
+                
+                for (i = [0 : coinmaxindex - 1]) {
+                    translate([coinleftx(i) + coinsd[i], -10, sorterminheight - topboardrim])
+                        cube([2 * coinpadding + boardthickness, 10 + tuberackfrontcuty(), sortermaxheight]);
+                }
+            }
+            transformtopboard(sorterminheight)
+                translate([0.5 * coinsd[0], -0.5, -topboardrim + boardthickness])
+                    rotate([-45, 0, 0])
+                        cube([coinleftx(coinmaxindex), topboardrim - boardthickness, topboardrim - boardthickness]);
         }
     }
 
@@ -1047,7 +1062,9 @@ module topboard() {
         verticalguard();
       
         if (guardstyle == "Frontandback")
-            translate ([0, boardwidth, boardwidth * sin (boardsecondaryslope)])
+            transformtopboard(0)
+            translate ([0, boardwidth, 0])
+            untransformtopboard(0)
             verticalguard();
     }
     topboardbottomcutout ();
