@@ -1,3 +1,8 @@
+/* Improved Auto Coin Sorter V7.6R                  */
+/* - Topboard flanks are now vertical               */
+/*                                                  */
+/* Version History                                  */
+/*                                                  */
 /* Improved Auto Coin Sorter V7.54                  */
 /* - Includes COP Columbian Peso                    */
 /* - Coin tube spacing slightly increased           */
@@ -165,7 +170,7 @@
 // CZK
 // https://www.thingiverse.com/thing:1616408
 // by
-// https://www.thingiverse.com/TomasHalbych
+// https://www.thingiverse.com/Tomas_Halbych
 //
 // DKK
 // https://www.thingiverse.com/thing:1032447
@@ -215,7 +220,7 @@
 // NIS
 // https://www.thingiverse.com/thing:2152362
 // by 
-// https://www.thingiverse.com/EshRobotics
+// https://www.thingiverse.com/Esh_Robotics
 //
 // NOK
 // https://www.thingiverse.com/thing:1024392
@@ -249,10 +254,8 @@ CoinRollVersion = 1; // [1: Coin Roll Version, 2:Classic Slot Version]
 // How much height to add to the default for the shortest tube? In millimeters:
 TubeExtraHeight = 0; // [-100:150]
 
-// How much extra topboard length for placing the coins on the sorter? (In percent of the total topboard length.):
-extratopboardlengthpct = 12; // [0:30]
-
-extratopboardlength = extratopboardlengthpct * 0.01;
+// How much extra topboard length for placing the coins on the sorter? (In millimeters.):
+extratopboardlength = 30; // [0:60]
 
 // Style of vertical guard
 guardstyle = "Frontandback";  // [Frontandback:Front and back guard rails, Frontguard: Front guard rail only]
@@ -262,6 +265,9 @@ extraguardheight = 15; // [0:30]
 
 // Topboard bottom rim height. (Holds topboard on.)
 topboardrim = 15; //[10:25]
+
+// Topboard bottom rim width.
+topboardrimwidth = 5; //[2:10]
 
 // Offset value used for rounding tube rack corners (normally no need to change)
 roundoffset = 1; // [0:2]
@@ -1002,41 +1008,35 @@ module boardbackmeshancientcoins(
 
 // Component: the solid board on top (topboard)
 module topboard() {
-  difference() {
-    
+  difference() 
+    {
     // the board itself
     union ()
     {
-        cutsides()
-            transformtopboard(sorterminheight)
-                cube([boardlength*2, boardwidth*2, boardthickness]);
+        topboard_blank ();
 
-        
         difference ()
         {
-            transformtopboard(sorterminheight)
-            translate ([0, 0, -topboardrim + boardthickness - 0.01])
-                linear_extrude (topboardrim)
-                    offset (topboardrim/2)
-                    scale ([1.05 + extratopboardlength, 1.05, 1])
-                    projection (cut = false)
-                        cutsides()
-                            transformtopboard(sorterminheight)
-                                cube([boardlength*2, boardwidth*2, boardthickness]);
-                            
-                        
-            cutsides()
-                transformtopboard(sorterminheight)
-                    cube([boardlength*2, boardwidth*2, boardthickness]);
             
+            translate ([0, 0, -topboardrim + boardthickness - 0.01])
+            hull ()
+            for (i = [0:1])
+                translate ([0, 0, i * topboardrim])
+                transformtopboard(sorterminheight)
+                linear_extrude (0.01)
+                offset (topboardrimwidth)
+                square ([(boxsize() [0] + extratopboardlength) / cos (boardprimaryslope), boxsize () [1]]);
+                        
             topboardbottomcutout ();
         }
     }
 
     // holes and cuts
-    for (i = [0 : coinmaxindex]) {
-      coinhole(i, biggerr=coinpaddingtopboard-coinpadding);
-      slopecutforcoin(i, biggerr=coinpaddingtopboard-coinpadding);
+    for (i = [0 : coinmaxindex]) 
+    {
+        coinhole(i, biggerr=coinpaddingtopboard-coinpadding);
+        
+        slopecutforcoin(i, biggerr=coinpaddingtopboard-coinpadding);
     }
   }
 
@@ -1053,6 +1053,13 @@ module topboard() {
     topboardbottomcutout ();
   }
   horizontalguard();
+}
+
+module topboard_blank ()
+{
+    cutsides()
+    transformtopboard(sorterminheight)
+    cube([boardlength*2, boardwidth*2, boardthickness]);
 }
 
 // Negative component: Basebox-sized hole in topboard bottom
@@ -1079,7 +1086,7 @@ module verticalguard() {
         {
             intersection() 
             {
-                cube([boardlength * (1 + extratopboardlength), boardthickness, sortermaxheight * 2]);
+                cube([boardlength + extratopboardlength, boardthickness, sortermaxheight * 2]);
                 
                 topside(sorterminheight + boardthickness - 0.1);
             }
@@ -1129,7 +1136,7 @@ module topverticalguard(altitude = 0, righthandaltitude = 0) {
             translate([0.8 * boardlength, 0, 0])
             cube([0.01, boardwidth*2, sortermaxheight]);
         
-            translate([2 * (1 + extratopboardlength) * boardlength, 0, 2 * righthandaltitude])
+            translate([2 * (extratopboardlength + boardlength), 0, 2 * righthandaltitude])
             cube([0.01, boardwidth*2, sortermaxheight]);
         }
     }
