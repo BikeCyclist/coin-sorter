@@ -1,12 +1,26 @@
-/* Improved Auto Coin Sorter V7.1                   */
-/* - Includes GBP British Pound                     */
-/* - Includes RUB Russian Ruble                     */
-/* - Unused "other" option removed from selection   */
+/* Improved Auto Coin Sorter V7.2                   */
+/* - New internal logic for coin selection          */
+/* - Includes ARS Argentine Peso                    */
+/* - Includes AUD Australian Dollar                 */
+/* - Includes BRL Brazilian Real                    */
+/* - Includes CLP Chilean Peso                      */
+/* - Includes CZK Czech Koruna                      */
+/* - Includes DKK Danish Krone                      */
+/* - Includes HKD Hong Kong Dollar                  */
+/* - Includes HUF Hungarian Forint                  */
+/* - Includes JPY Japanese Yen                      */
 /*                                                  */
 /* by Bikecyclist                                   */
 /* https://www.thingiverse.com/Bikecyclist          */
 /*                                                  */
 /* Version History                                  */
+/*                                                  */
+/* Improved Auto Coin Sorter V7.1                   */
+/* - Includes GBP British Pound                     */
+/* - Includes RUB Russian Ruble                     */
+/* - Unused "other" option removed from selection   */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
 /*                                                  */
 /* Improved Auto Coin Sorter V7                     */
 /* https://www.thingiverse.com/thing:3467834        */
@@ -61,11 +75,59 @@
 /* https://www.thingiverse.com/thing:499177         */
 /* by Youngcat                                      */
 /* https://www.thingiverse.com/youngcat             */
+/*                                                  */
+/* Customized versions of Youngcat's Coin Sorter    */
+/* for the following currencies:                    */
+/*                                                  */
+// ARS
+// https://www.thingiverse.com/thing:1955336
+// by
+// https://www.thingiverse.com/charly3darg
+//
+// AUD
+// https://www.thingiverse.com/thing:1073586
+// by
+// https://www.thingiverse.com/Sadiablo
+//
+// BRL
+// https://www.thingiverse.com/thing:958842
+// by
+// https://www.thingiverse.com/igcefa
+//
+// CLP
+// https://www.thingiverse.com/thing:1869330
+// by
+// https://www.thingiverse.com/yutroc
+//
+// CZK
+// https://www.thingiverse.com/thing:1616408
+// by
+// https://www.thingiverse.com/Tomas_Halbych
+//
+// DKK
+// https://www.thingiverse.com/thing:1032447
+// by
+// https://www.thingiverse.com/Nonbeliever
+//
+// HKD
+// https://www.thingiverse.com/thing:1681392
+// by
+// https://www.thingiverse.com/g2david
+//
+// HUF
+// https://www.thingiverse.com/thing:1025395
+// by
+// https://www.thingiverse.com/thebence98
+//
+// JPY
+// https://www.thingiverse.com/thing:1717615
+// by
+// https://www.thingiverse.com/miettal
 
 /* [General] */
 
 // Choose a currency you use.
-currency = "eur"; // [usd:USD - US dollar, eur:EUR - Euro, cad:CAD - Canadian dollar, chf:CHF - Swiss franc, gbp:GBP - British Pounds, pen:PEN - Peruvian Sol, pln:PLN - Polish Zloty, rub:RUB - Russian Ruble, sek:SEK - Swedish Krona, thb:THB - Thai Baht]
+currency = 0; // [0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:JPY - Japanese Yen, 13:PEN - Peruvian Sol, 14:PLN - Polish Zloty, 15:RUB - Russian Ruble, 16:SEK - Swedish Krona, 17:THB - Thai Baht, 18:USD - US dollar]
 
 // How much height to add to the default for the shortest tube? In millimeters:
 tube_extra_height = 0; // [-100:150]
@@ -98,73 +160,135 @@ part = "all_unassembled"; // [all:All parts assembled, all_unassembled:All parts
 
 /* [Hidden] */
 
-//             2.00   0.50   1.00   0.20   0.05   0.10   0.02   0.01
-eur_coins = [[25.75, 24.25, 23.25, 22.25, 21.25, 19.75, 18.75, 16.25],
-             [ 2.20,  2.38,  2.33,  2.14,  1.67,  1.93,  1.67,  1.67],
-             [   25,    20,    25,    40,    50,    40,    50,    50]];
+all_coins = [
+            ["ARS",
+             [26.00, 25.00, 24.00, 19.00],
+             [ 2.15,  2.00,  1.75,  1.35],
+             [   25,    25,    50,    50],
+             95],
+             
+            // Source: Wikipedia
+            ["AUD",
+             [ 31.65, 28.65, 25.00, 23.60, 20.50, 19.41],
+             [  2.80,  2.50,  3.00,  2.00,  2.80,  1.30],
+             [    25,    25,    25,    50,    25,    50],
+             90],
+             
+            ["BRL",
+             [  27,     25,  23.50,    23,    22,    22,    21,    20],
+             [ 1.95,  2.25,   1.40,  2.85,  1.65,  1.20,  1.20,  2.23],
+             [   25,    25,     50,    25,    50,    50,    50,    50],
+             80],
 
-//             0.50   1.00   0.25   0.05   0.01   0.10
-usd_coins = [[30.61, 26.50, 24.26, 21.21, 19.05, 17.91],
-             [ 2.15,  2.00,  1.75,  1.95,  1.55,  1.35],
-             [   20,    25,    40,    40,    50,    50]];
-
-gbp_coins = [[28.5,	27.5, 25.9, 24.5, 23.5, 21.4, 20.3, 18.0],
-              [2.5, 1.78, 2.03, 1.85, 3.15,  1.7, 1.65, 1.70],
-              [ 25,   25,   25,   50,   25,   50,   50,   50]];
-
-cad_coins = [[28.00, 27.13, 26.50, 23.88, 21.20, 19.05, 18.03],
+            ["CAD", 
+             [28.00, 27.13, 26.50, 23.88, 21.20, 19.05, 18.03],
              [ 1.80,  1.95,  1.75,  1.58,  1.76,  1.45,  1.22],
-             [   25,    25,    50,    50,    50,    50,    50]];
-
-chf_coins = [[31.45, 27.40, 23.20, 21.05, 19.15, 18.20, 17.15],
+             [   25,    25,    50,    50,    50,    50,    50],
+             90],
+            
+            ["CHF",  
+             [31.45, 27.40, 23.20, 21.05, 19.15, 18.20, 17.15],
              [ 2.35,  2.15,  1.15,  1.65,  1.45,  1.25,  1.25],
-             [   25,    25,    50,    50,    50,    50,    50]];
+             [   25,    25,    50,    50,    50,    50,    50],
+             75],
+             
+            ["CLP",
+             [ 26.94, 25.52,  23.5,  21.08],
+             [  2.00,  2.00,  2.33,   1.46],
+             [    25,    25,    25,     50],
+             75],
+             
+            ["CZK",
+             [ 27.50,    26,  24.5,    23,  21.5,    20],
+             [  2.55,  2.55,  2.55,  1.85,  1.85,  1.85],
+             [    25,    25,    25,    50,    50,    50],
+             90],
+            
+            ["DKK",
+             [ 28.5,  27.00,  24.5,  23.35,  21.5,  20.25],
+             [  2.0,   2.35,   1.8,    2.3,  1.55,    1.6],
+             [   25,     25,    50,     25,    50,     50],
+             90],
 
-pen_coins = [[25.50, 24.38, 23.00, 22.30, 22.00, 20.50, 18.00],
+            ["EUR",
+//             2.00   0.50   1.00   0.20   0.05   0.10   0.02   0.01
+             [25.75, 24.25, 23.25, 22.25, 21.25, 19.75, 18.75, 16.25],
+             [ 2.20,  2.38,  2.33,  2.14,  1.67,  1.93,  1.67,  1.67],
+             [   25,    20,    25,    40,    50,    40,    50,    50],
+             80],
+            
+            ["GBP", 
+             [28.5,	27.5, 25.9, 24.5, 23.5, 21.4, 20.3, 18.0],
+             [2.5, 1.78, 2.03, 1.85, 3.15,  1.7, 1.65, 1.70],
+             [ 25,   25,   25,   50,   25,   50,   50,   50],
+             90],
+             
+            ["HKD",
+             [   28, 27.00,  25.5,  24,  22.50,    19,  17.5],
+             [ 2.03,  3.26,  1.95,   3,   1.72,  1.52,  1.15],
+             [   25,    25,    25,  25,     50,    50,    50],
+             95],
+             
+            ["HUF",
+             [ 28.3,  27.4,  26.3,  24.8,  23.8,  21.2],
+             [    2,   1.7,   1.9,   1.3,   2.2,   1.3],
+             [   25,    50,    50,    50,    50,    50],
+             95],
+
+            ["JPY",
+             [26.5,  23.5,  22.6,  22.0,  21.0,  20.0],
+             [ 1.8,   1.5,   1.7,   1.5,   1.7,   1.5],
+             [   25,   50,    50,    50,    50,    50],
+             90],
+
+            ["PEN",   
+             [25.50, 24.38, 23.00, 22.30, 22.00, 20.50, 18.00],
              [ 1.65,  2.13,  1.26,  2.07,  1.65,  1.26,  1.26],
-             [   25,    25,    50,    50,    50,    50,    50]];
-
-pln_coins = [[24.00, 23.00, 21.50, 20.50, 19.50, 18.50, 17.50, 16.50, 15.50],
+             [   25,    25,    50,    50,    50,    50,    50],
+             90],
+             
+            ["PLN",
+             [24.00, 23.00, 21.50, 20.50, 19.50, 18.50, 17.50, 16.50, 15.50],
              [ 2.00,  1.70,  2.00,  1.70,  1.40,  1.70,  1.40,  1.70,  1.40],
-             [   25,    25,    25,    50,    50,    50,    50,    50,    50]];
+             [   25,    25,    25,    50,    50,    50,    50,    50,    50],
+             75],
 
-rub_coins = [[25.08, 23.17, 22.10, 20.56, 19.47, 17.55],
+            ["RUB",
+             [25.08, 23.17, 22.10, 20.56, 19.47, 17.55],
              [ 1.90,  1.84,  2.25,  1.40,  1.45,  1.23],
-             [   25,    25,    25,    50,    50,    50]];
-
-sek_coins = [[23.75, 22.50, 20.50, 19.50],
+             [   25,    25,    25,    50,    50,    50],
+             70],
+             
+            ["SEK",             
+             [23.75, 22.50, 20.50, 19.50],
              [ 1.97,  1.79,  1.79,  2.90],
-             [   25,    25,    25,    25]];
+             [   25,    25,    25,    25],
+             70],
 
-thb_coins = [[26.00, 24.05, 22.05, 20.01],
+            ["THB",
+             [26.00, 24.05, 22.05, 20.01],
              [ 2.16,  2.13,  1.48,  1.38],
-             [   20,    20,    50,    50]];
+             [   20,    20,    50,    50],
+             70],
+
+            ["USD",
+//             0.50   1.00   0.25   0.05   0.01   0.10
+             [30.61, 26.50, 24.26, 21.21, 19.05, 17.91],
+             [ 2.15,  2.00,  1.75,  1.95,  1.55,  1.35],
+             [   20,    25,    40,    40,    50,    50],
+             75]
+
+             ];
 
 //
 // MAIN
 //
 
-height = tube_extra_height +
-        currency == "usd" ? 75 :
-        currency == "eur" ? 80 :
-        currency == "cad" ? 80 :
-        currency == "chf" ? 70 :
-        currency == "gbp" ? 90 :
-        currency == "pen" ? 90 :
-        currency == "pln" ? 75 :
-        currency == "sek" ? 70 :
-        currency == "thb" ? 70 : 70;
+echo (all_coins [currency]);
 
-coins = currency == "usd" ? usd_coins :
-        currency == "eur" ? eur_coins :
-        currency == "cad" ? cad_coins :
-        currency == "chf" ? chf_coins :
-        currency == "gbp" ? gbp_coins :
-        currency == "pen" ? pen_coins :
-        currency == "pln" ? pln_coins :
-        currency == "rub" ? rub_coins :
-        currency == "sek" ? sek_coins :
-        currency == "thb" ? thb_coins : eur_coins;
+height = tube_extra_height + all_coins [currency][4];
+
+coins = [all_coins [currency][1], all_coins [currency][2], all_coins [currency][3]];
 
 coins_d = coins[0];
 coins_thickness = coins[1];
