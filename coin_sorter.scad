@@ -1,4 +1,6 @@
-/* Improved Auto Coin Sorter V7.53                  */
+/* Improved Auto Coin Sorter V7.53b                 */
+/* - Cleaned up some redundant parameters           */
+/* - Introduced new parameter for back wall height  */
 /* - Includes DEM Deutsche Mark                     */
 /*                                                  */
 /* Improved Auto Coin Sorter V7.52                  */
@@ -329,6 +331,9 @@ coin10n = 50;
 // Enter default length of shortest tube
 defaultshortest = 75;
 
+// Enter extra clearance of basebox back wall
+baseboxbackclearance = 5;
+
    
 /* [Hidden] */
 
@@ -552,17 +557,14 @@ allcoins = [
              [ 28,    26,   23,  20],
              [  3,     2,    2,   2],
              [ 25,   25,   50,   50],
-             100],
-             
+             100]
+
              ["DEM",
 //             5.00   2.00   1.00   0.10   0.50   0.02   0.05   0.01
              [29.00, 26.75, 23.50, 21.50, 20.00, 19.25, 18.50, 16.50],
              [ 2.07,  1.79,  1.79,  1.70,  1.58,  1.52,  1.70,  1.38],
              [   40,    50,    50,    50,    50,    50,    50,    50],
              100]
-            
-
-
              ];
 
 echo (allcoins [currency]);
@@ -706,7 +708,7 @@ module main() {
 }
 module mainimpl(topboardlift=0, tuberacklift=0, tubeslift=0) {
   if (enablebox) {
-    basebox(false);
+    basebox();
   }
   if (enabletopboard) {
     translate([0, 0, topboardlift]) topboard();
@@ -721,9 +723,9 @@ module mainimpl(topboardlift=0, tuberacklift=0, tubeslift=0) {
 module mainimplflat(topboardlift=0, tuberacklift=0, tubeslift=0) {
   if (enablebox) {
     if (!enablemesh)
-        basebox(false);
+        basebox();
     else
-        rotate([-90, 0, 0]) basebox(false);
+        rotate([-90, 0, 0]) basebox();
   }
   if (enabletopboard) {
     translate([0, 0, topboardlift])
@@ -840,7 +842,7 @@ module boardbackhollow(thicker=0) {
   }
 }
 module boxbackfill(thicker=0) {
-  cuttopside(altitude = -thicker) {
+  cuttopside(altitude = -thicker - baseboxbackclearance) {
     boxbackfilltall();
   }
 }
@@ -1033,7 +1035,7 @@ module topboardbottomcutout ()
     translate ([-topboardbigger/2, -topboardbigger/2, 0.01])
     resize ([boxsize ()[0] + topboardbigger, boxsize ()[1] + topboardbigger, boxsize ()[2]])
     hull ()
-    basebox (false);
+    basebox();
 }
 
 // Component: the guard on top of the top board.
