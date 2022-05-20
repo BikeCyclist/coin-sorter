@@ -1,7 +1,18 @@
+/* Improved Auto Coin Sorter                        */
+/* https://www.thingiverse.com/thing:3203049        */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
+/*                                                  */
+/* Remixed from Auto Coin Sorter for All Currencies */
+/* https://www.thingiverse.com/thing:499177         */
+/* by Youngcat                                      */
+/* https://www.thingiverse.com/youngcat/about       */
+
+
 /* [General] */
 
 // Choose a currency you use.
-currency = "usd"; // [usd:USD - US dollar, eur:EUR - Euro, chf:CHF - Swiss franc, cad:CAD - Canadian dollar, thb:THB - Thai Baht, other:Other (See "Slot customization" tab above)]
+currency = "eur"; // [usd:USD - US dollar, eur:EUR - Euro, chf:CHF - Swiss franc, cad:CAD - Canadian dollar, thb:THB - Thai Baht, other:Other (See "Slot customization" tab above)]
 
 // How tall is the the shortest tube? In millimeters:
 height = 50; // [10:150]
@@ -13,7 +24,7 @@ pattern = "mesh"; // [no:Solid without pattern, chncoin:Chinese ancient coin pat
 image = 0; //// [1:Yes please, 0:No thanks]
 
 // Which one would you like to see?
-part = "all"; // [all:All these three parts assembled together,all_unassembled:All these three parts unassembled,basebox:Base box only,topboard:Top board only,tubes:Tubes only]
+part = "all_unassembled"; // [all:All these three parts assembled together,all_unassembled:All these three parts unassembled,basebox:Base box only,topboard:Top board only,tubes:Tubes only]
 
 /* [Slot customization] */
 
@@ -173,7 +184,7 @@ module main() {
 }
 module main_impl(top_board_lift=0, tubes_lift=0) {
   if (enable_box) {
-    base_box();
+    base_box(false);
   }
   if (enable_top_board) {
     translate([0, 0, top_board_lift]) top_board();
@@ -184,7 +195,7 @@ module main_impl(top_board_lift=0, tubes_lift=0) {
 }
 module main_impl_flat(top_board_lift=0, tubes_lift=0) {
   if (enable_box) {
-    rotate([-90, 0, 0]) base_box();
+    rotate([-90, 0, 0]) base_box(false);
   }
   if (enable_top_board) {
     translate([0, 0, top_board_lift])
@@ -205,7 +216,7 @@ module main_impl_flat(top_board_lift=0, tubes_lift=0) {
 //  Y8888P' YP   YP `8888Y' Y88888P      Y8888P'  `Y88P'  YP    YP
 
 // Component: the box.
-module base_box() {
+module base_box(show_dovetails = true) {
   render(convexity=2)
   difference() {
     union() {
@@ -228,7 +239,7 @@ module base_box() {
     }
   }
 
-  if (enable_dovetail) {
+  if (enable_dovetail && show_dovetails) {
     base_box_dovetails();
   }
 
@@ -497,13 +508,38 @@ module board_back_mesh_ancient_coins(
 module top_board() {
   difference() {
     // the board itself
-    cut_sides() {
-      transform_top_board(sorter_min_height) {
-        cube([board_length*2, board_width*2, board_thickness]);
-      }
+    
+    union ()
+    {
+        cut_sides()
+            transform_top_board(sorter_min_height)
+                cube([board_length*2, board_width*2, board_thickness]);
+
+        
+        difference ()
+        {
+            transform_top_board(sorter_min_height)
+            translate ([0, 0, -10 + board_thickness - 0.01])
+                linear_extrude (10)
+                    offset (5)
+                    scale ([1.05, 1.05, 1])
+                    projection (cut = false)
+                        cut_sides()
+                            transform_top_board(sorter_min_height)
+                                cube([board_length*2, board_width*2, board_thickness]);
+                            
+                        
+            cut_sides()
+                transform_top_board(sorter_min_height)
+                    cube([board_length*2, board_width*2, board_thickness]);
+            
+            translate ([0, 0, 0.01])
+                hull ()
+                    base_box (false);
+        }
     }
     // the femail dovetails
-    if (enable_dovetail) {
+    if (enable_dovetail && false) {
       top_board_dovetails();
     }
 
