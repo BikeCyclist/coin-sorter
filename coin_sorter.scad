@@ -24,7 +24,7 @@ pattern = "mesh"; // [no:Solid without pattern, chncoin:Chinese ancient coin pat
 image = 0; //// [1:Yes please, 0:No thanks]
 
 // Which one would you like to see?
-part = "all_unassembled"; // [all:All these three parts assembled together,all_unassembled:All these three parts unassembled,basebox:Base box only,topboard:Top board only,tubes:Tubes only]
+part = "topboard"; // [all:All these three parts assembled together,all_unassembled:All these three parts unassembled,basebox:Base box only,topboard:Top board only,tubes:Tubes only]
 
 /* [Slot customization] */
 
@@ -171,7 +171,24 @@ echo("board_width:", board_width);
 echo("sorter_min_height:", sorter_min_height);
 echo("sorter_max_height:", sorter_max_height);
 
-main();
+
+cutdup ([0, -10, 0])
+    translate ([0, 0, -board_thickness/2])
+        main();
+        
+module cutdup (d = [0, 0, 0])
+{
+    for (j = [-1, 1])
+        translate (j * d)
+            rotate ([(j + 1) * 90, 0, 0])        
+                difference ()
+                {
+                    children ();
+                    
+                    translate ([0, 0, j * 500])
+                        cube ([1000, 1000, 1000], center = true);
+                }
+}
 
 module main() {
   top_board_lift = assembled ? 0 : unassembled_top_board_lift;
