@@ -1,18 +1,30 @@
-/* Improved Auto Coin Sorter V3                     */
+/* Improved Auto Coin Sorter V4                     */
 /* https://www.thingiverse.com/thing:3203049        */
 /* by Bikecyclist                                   */
 /* https://www.thingiverse.com/Bikecyclist          */
 /*                                                  */
-/* Remixed from Auto Coin Sorter for All Currencies */
+/* Remixed from                                     */
+/*                                                  */
+/* Customized Auto Coin Sorter PLN                  */
+/* (No longer on Thingiverse)                       */
+/* by Seveneq                                       */
+/* https://www.thingiverse.com/Seveneq              */
+/*                                                  */
+/* Improved Auto Coin Sorter V3, V2, V1             */
+/* https://www.thingiverse.com/thing:3203049        */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
+/*                                                  */
+/* Auto Coin Sorter for All Currencies              */
 /* https://www.thingiverse.com/thing:499177         */
 /* by Youngcat                                      */
-/* https://www.thingiverse.com/youngcat/about       */
+/* https://www.thingiverse.com/youngcat             */
 
 
 /* [General] */
 
 // Choose a currency you use.
-currency = "eur"; // [usd:USD - US dollar, eur:EUR - Euro, chf:CHF - Swiss franc, cad:CAD - Canadian dollar, pen:PEN - Peruvian Sol, sek:SEK - Swedish Krona, thb:THB - Thai Baht, other:Other (See "Slot customization" tab above)]
+currency = "eur"; // [usd:USD - US dollar, eur:EUR - Euro, chf:CHF - Swiss franc, cad:CAD - Canadian dollar, pen:PEN - Peruvian Sol, pln:PLN - Polish Zloty, sek:SEK - Swedish Krona, thb:THB - Thai Baht, other:Other (See "Slot customization" tab above)]
 
 // How tall is the the shortest tube? In millimeters:
 height = 50; // [10:150]
@@ -75,6 +87,8 @@ cad_coins = [[28.00, 27.13, 26.50, 23.88, 21.20, 19.05, 18.03],
              [ 1.80,  1.95,  1.75,  1.58,  1.76,  1.45,  1.22]];
 pen_coins = [[25.50, 24.38, 23.00, 22.30, 22.00, 20.50, 18.00],
              [ 1.65,  2.13,  1.26,  2.07,  1.65,  1.26,  1.26]];             
+pln_coins = [[24.00, 23.00, 21.50, 20.50, 19.50, 18.50, 17.50, 16.50, 15.50],
+             [ 2.00,  1.70,  2.00,  1.70,  1.40,  1.70,  1.40,  1.70,  1.40]];
 sek_coins = [[23.75, 22.50, 20.50, 19.50],
              [ 1.97,  1.79,  1.79,  2.90]];             
 thb_coins = [[26.00, 24.05, 22.05, 20.01],
@@ -103,6 +117,7 @@ coins = currency == "usd" ? usd_coins :
         currency == "chf" ? chf_coins :
         currency == "cad" ? cad_coins :
         currency == "pen" ? pen_coins :
+        currency == "pln" ? pln_coins :
         currency == "sek" ? sek_coins :
         currency == "thb" ? thb_coins : other_coins;
 
