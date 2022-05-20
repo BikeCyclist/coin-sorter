@@ -1,3 +1,16 @@
+/* Improved Auto Coin Sorter V7.3                   */
+/* - Scale placement more accurate                  */
+/* - Includes IDR Indonesian Rupiah                 */
+/* - Includes INR Indian Rupee                      */
+/* - Includes ISK Icelandic Krona                   */
+/* - Includes MXN Mexican Peso                      */
+/* - Includes SGD Singapore Dollar                  */
+/*                                                  */
+/* by Bikecyclist                                   */
+/* https://www.thingiverse.com/Bikecyclist          */
+/*                                                  */
+/* Version History                                  */
+/*                                                  */
 /* Improved Auto Coin Sorter V7.2                   */
 /* - New internal logic for coin selection          */
 /* - Includes ARS Argentine Peso                    */
@@ -12,9 +25,6 @@
 /*                                                  */
 /* by Bikecyclist                                   */
 /* https://www.thingiverse.com/Bikecyclist          */
-/*                                                  */
-/* Version History                                  */
-/*                                                  */
 /* Improved Auto Coin Sorter V7.1                   */
 /* - Includes GBP British Pound                     */
 /* - Includes RUB Russian Ruble                     */
@@ -65,6 +75,11 @@
 /* https://www.thingiverse.com/thing:3203049        */
 /* by Bikecyclist                                   */
 /* https://www.thingiverse.com/Bikecyclist          */
+/*                                                  */
+/* Sorteador Monedas Mexicanas                      */
+/* https://www.thingiverse.com/thing:3204506        */
+/* by morenot3131                                   */
+/* https://www.thingiverse.com/morenot3131          */
 /*                                                  */
 /* Coin sorter for UK coins (inc new £1)            */
 /* https://www.thingiverse.com/thing:2498200        */
@@ -119,6 +134,16 @@
 // by
 // https://www.thingiverse.com/thebence98
 //
+// IDR
+// https://www.thingiverse.com/thing:2166484
+// by
+// https://www.thingiverse.com/rizkypratama
+//
+// INR
+// https://www.thingiverse.com/thing:2034732
+// by
+// https://www.thingiverse.com/Neeraja
+//
 // JPY
 // https://www.thingiverse.com/thing:1717615
 // by
@@ -127,7 +152,7 @@
 /* [General] */
 
 // Choose a currency you use.
-currency = 0; // [0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:JPY - Japanese Yen, 13:PEN - Peruvian Sol, 14:PLN - Polish Zloty, 15:RUB - Russian Ruble, 16:SEK - Swedish Krona, 17:THB - Thai Baht, 18:USD - US dollar]
+currency = 0; // [0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 16:MXN - Mexican Peso, 17:PEN - Peruvian Sol, 18:PLN - Polish Zloty, 19:RUB - Russian Ruble, 20:SEK - Swedish Krona, 21:SGD - Singapore Dollar, 22:THB - Thai Baht, 23:USD - US dollar]
 
 // How much height to add to the default for the shortest tube? In millimeters:
 tube_extra_height = 0; // [-100:150]
@@ -234,6 +259,26 @@ all_coins = [
              [    2,   1.7,   1.9,   1.3,   2.2,   1.3],
              [   25,    50,    50,    50,    50,    50],
              95],
+             
+            ["IDR",
+             [ 27.2,  25,   24,   23],
+             [  2.3, 2.1,  1.5,  1.9],
+             [   25,  25,   50,   50],
+             90],
+             
+            ["INR",
+             [  28,   25,   23,   22],
+             [ 1.8,  1.4,  2.5,  1.3],
+             [   25,  25,   25,   50],
+             70],
+             
+             // Source: Wikipedia
+             ["ISK",
+//               10    100      5     50      1
+             [27.50, 25.50, 24.50, 23.00, 21.50],
+             [ 1.78,  2.25,  1.75,  2.60,  1.66],
+             [   25,    25,    25,    25,    50],
+             70],
 
             ["JPY",
              [26.5,  23.5,  22.6,  22.0,  21.0,  20.0],
@@ -241,7 +286,13 @@ all_coins = [
              [   25,   50,    50,    50,    50,    50],
              90],
 
-            ["PEN",   
+            ["MXN",
+             [  32,     28,  25.5,    23,   21,   17],
+             [ 2.15,  2.00,  1.75,  1.95,  1.8,  1.7],
+             [   25,    25,    50,    50,   50,   50],
+             90],
+             
+            ["PEN",
              [25.50, 24.38, 23.00, 22.30, 22.00, 20.50, 18.00],
              [ 1.65,  2.13,  1.26,  2.07,  1.65,  1.26,  1.26],
              [   25,    25,    50,    50,    50,    50,    50],
@@ -264,6 +315,14 @@ all_coins = [
              [ 1.97,  1.79,  1.79,  2.90],
              [   25,    25,    25,    25],
              70],
+            
+             // Source: Wikipedia
+             ["SGD",
+//             1.00   0.50   0.20   0.10   0.05
+             [24.65, 23.00, 21.00, 18.50, 16.75],
+             [ 2.50,  2.45,  1.72,  1.38,  1.22],
+             [   25,    25,    50,    50,    50],
+             90],
 
             ["THB",
              [26.00, 24.05, 22.05, 20.01],
@@ -824,7 +883,8 @@ module tuberack() {
     }
 
     if (enable_tuberack_scale) {
-      translate([0, 0, tuberack_base_thickness]) {
+      translate([0, 0, tuberack_base_thickness + 1.5]) // +1.5 compensates for tube bottom thickness
+      {
         tuberack_scales();
       }
     }
