@@ -1,5 +1,10 @@
 /* Improved Auto Coin Sorter V6                     */
 /* - Includes Features from Compact Version         */
+/* - Coin roll support looks at more details        */
+/* - Coin tube base chamfered (anti-elephant)       */
+/* - New style of base box backside pattern added   */
+/* - Non-contoured base box backside added          */
+/* - Topboard tolerance added                       */
 /* https://www.thingiverse.com/thing:3421345        */
 /* by Bikecyclist                                   */
 /* https://www.thingiverse.com/Bikecyclist          */
@@ -49,10 +54,13 @@ extra_topboard_length_pct = 10; // [0:25]
 extra_topboard_length = extra_topboard_length_pct * 0.01;
 
 // Choose a pattern for the back side.
-pattern = "mesh"; // [no:Solid without pattern, chncoin:Chinese ancient coin pattern, mesh:Mesh pattern]
+pattern = "mesh"; // [no:Solid with contoured back, chncoin:Chinese ancient coin pattern, mesh:Mesh pattern]
+
+// If a back side pattern is selected, should it be filled in?
+patternfill = "yes"; // [yes:filled-in back, no:open back]
 
 // Which one would you like to see?
-part = "basebox"; // [all:All parts assembled, all_unassembled:All parts unassembled, basebox:Base box only,topboard:Top board only, tuberack:Tube rack only, tubes:Tubes only]
+part = "topboard"; // [all:All parts assembled, all_unassembled:All parts unassembled, basebox:Base box only,topboard:Top board only, tuberack:Tube rack only, tubes:Tubes only]
 
 /* [Slot customization] */
 
@@ -177,13 +185,16 @@ coins_thickness = coins[1];
 coins_n = coins [2];
 
 enable_box = (part == "all" || part == "all_unassembled" || part == "basebox");
-  enable_mesh = (pattern != "no");
+enable_mesh = (pattern != "no" && pattern != "slim");
 enable_top_board = (part == "all" || part == "all_unassembled" || part == "topboard");
 enable_tubes = (part == "all" || part == "all_unassembled" || part == "tubes");
 enable_tuberack = (part == "all" || part == "all_unassembled" || part == "tuberack");
 enable_tuberack_scale = true;
 assembled = (part != "all_unassembled");
 lay_flat = (part != "all" && part != "all_unassembled");
+
+// Thickness of back-side fill-in (if selected)
+min_wall_thickness = 0.3;
 
 sorter_min_height = height;
 board_thickness = 2.0;
@@ -208,6 +219,8 @@ unassembled_top_board_lift = 45;
 unassembled_tuberack_lift = 20;
 unassembled_tubes_lift = 40;
 
+topboard_bigger = 1.6;
+
 $fa = 6;  // default: 12
 $fs = 1;  // default: 2
 
@@ -230,6 +243,8 @@ echo("board_width:", board_width);
 echo("sorter_min_height:", sorter_min_height);
 echo("sorter_max_height:", sorter_max_height);
 
+//projection (cut = true)
+translate ([0, 0, -80])
 main();
 
 module main() {
@@ -280,7 +295,7 @@ module main_impl_flat(top_board_lift=0, tuberack_lift=0, tubes_lift=0) {
 
 // Component: the box.
 module base_box() {
-  render(convexity=2)
+  render(convexity=4)
   difference() {
     union() {
       box_empty();
@@ -297,9 +312,18 @@ module base_box() {
         board_back_hollow();
         box_back_fill();
       }
+      if (patternfill == "yes")
+        box_empty ();
     }
+    if (patternfill == "yes")
+        translate ([0, box_size()[1], 0])
+        rotate ([-90, 0, 0])
+        linear_extrude (min_wall_thickness, convexity = 2)
+        projection (cut = false)
+        rotate ([90, 0, 0])
+        box_empty ();
   } else {
-    box_back_fill();
+      box_back_fill();
   }
 }
 
@@ -459,11 +483,11 @@ module board_back_mesh_ancient_coins(
 // TOP BOARD
 //
 
-// Component: the solid board on top.
+// Component: the solid board on top (topboard)
 module top_board() {
   difference() {
-    // the board itself
     
+    // the board itself
     union ()
     {
         cut_sides()
@@ -488,7 +512,8 @@ module top_board() {
                 transform_top_board(sorter_min_height)
                     cube([board_length*2, board_width*2, board_thickness]);
             
-            translate ([0, 0, 0.01])
+            translate ([-topboard_bigger/2, -topboard_bigger/2, 0.01])
+                resize ([box_size ()[0] + topboard_bigger, box_size ()[1] + topboard_bigger, box_size ()[2]])
                 hull ()
                     base_box (false);
         }
@@ -709,8 +734,15 @@ module coin_tube (n) {
 }
 
 module make_coin_tube (d_coin, h_coin, n_coins) {
+    translate ([0, 0, 1])
     difference () {
-        cylinder (d = 1 + d_coin, h = 0.5 + (n_coins + 0.5) * h_coin);
+        hull ()
+        {
+            translate ([0, 0, -1])
+            cylinder (d = d_coin, h = 0.5 + (n_coins + 0.5) * h_coin);
+            
+            cylinder (d = 1 + d_coin, h = 0.5 + (n_coins + 0.5) * h_coin);
+        }
         
         translate ([0, 0, 0.5])
             cylinder (d = d_coin, h = 0.5 + (n_coins + 0.5) * h_coin + 0.01);
