@@ -18,10 +18,13 @@ currency = "eur"; // [usd:USD - US dollar, eur:EUR - Euro, chf:CHF - Swiss franc
 height = 50; // [10:150]
 
 // Choose a pattern for the back side.
-pattern = "no"; // [no:Solid without pattern, chncoin:Chinese ancient coin pattern, mesh:Mesh pattern]
+pattern = "mesh"; // [no:Solid without pattern, chncoin:Chinese ancient coin pattern, mesh:Mesh pattern]
+
+// Would you like Tom-and-Jerry pictures on the left side and right side? (Not fully supported; may only work with OpenSCAD version 2014.09 ~ 2014.12.)
+image = 0; //// [1:Yes please, 0:No thanks]
 
 // Which one would you like to see?
-part = "all"; // [all:All these three parts assembled together,all_unassembled:All these three parts unassembled,basebox:Base box only,topboard:Top board only,tubes:Tubes only]
+part = "all_unassembled"; // [all:All these three parts assembled together,all_unassembled:All these three parts unassembled,basebox:Base box only,topboard:Top board only,tubes:Tubes only]
 
 /* [Slot customization] */
 
@@ -60,10 +63,6 @@ coin_9_thickness = 0;
 coin_10_diameter = 0;
 coin_10_thickness = 0;
 
-/* [Scale] */
-
-scale_ticks = 5;
-
 /* [Hidden] */
 
 usd_coins = [[30.61, 26.50, 24.26, 21.21, 19.05, 17.91],
@@ -87,10 +86,14 @@ other_coins_d_t = [
 other_coins = [[for (i=other_coins_d_t) if(i[0] > 0) i[0]],
                [for (i=other_coins_d_t) if(i[0] > 0) i[1]]];
 
-//
-// MAIN
-//
-  
+
+//  .88b  d88.   .d8b.   d888888b  d8b   db
+//  88'YbdP`88  d8' `8b    `88'    888o  88
+//  88  88  88  88ooo88     88     88V8o 88
+//  88  88  88  88~~~88     88     88 V8o88
+//  88  88  88  88   88    .88.    88  V888
+//  YP  YP  YP  YP   YP  Y888888P  VP   V8P
+
 coins = currency == "usd" ? usd_coins :
         currency == "eur" ? eur_coins :
         currency == "chf" ? chf_coins :
@@ -101,14 +104,15 @@ coins_d = coins[0];
 coins_thickness = coins[1];
 
 enable_box = (part == "all" || part == "all_unassembled" || part == "basebox");
-enable_box_emptier = false;
-enable_mesh = (pattern != "no");
-  
+  enable_dovetail = true;
+  enable_box_emptier = false;
+  enable_mesh = (pattern != "no");
+  enable_image = (image == 1);
 enable_top_board = (part == "all" || part == "all_unassembled" || part == "topboard");
 enable_tubes = (part == "all" || part == "all_unassembled" || part == "tubes");
-enable_tube_scale = true;
-enable_tube_emptier = false;
-inspect_tube_inside = false;
+  enable_tube_scale = true;
+  enable_tube_emptier = false;
+  inspect_tube_inside = false;
 assembled = (part != "all_unassembled");
 lay_flat = (part != "all" && part != "all_unassembled");
 
@@ -116,13 +120,24 @@ sorter_min_height = height;
 board_thickness = 2.0;
 board_left_padding = 2;
 board_right_padding = 13;
-board_primary_slope = 20; // Original: 16
+board_primary_slope = 16;
 board_secondary_slope = 15;
 horizontal_guard_width = 3;
 coin_padding = 0.4;
 coin_padding_top_board = 0.25;
 nozzle_size = 0.4;
 nozzle_size_upbound = 0.41;
+
+dovetail_count = 4;
+dovetail_back_max_width = 10;
+dovetail_back_min_width = 9;
+dovetail_side_max_width = 10;
+dovetail_side_min_width = 9;
+dovetail_femail_margin = 0.5;
+
+image_left_size = 25;
+image_right_size = 30;
+image_dir = "";
 
 tubes_shorter = 5;
 tubes_front_back_cut = 2;
@@ -172,7 +187,7 @@ module main_impl(top_board_lift=0, tubes_lift=0) {
     base_box(false);
   }
   if (enable_top_board) {
-    translate([0, 0, top_board_lift]) *top_board();
+    translate([0, 0, top_board_lift]) top_board();
   }
   if (enable_tubes) {
     translate([0, 0, tubes_lift]) tubes();
@@ -193,16 +208,23 @@ module main_impl_flat(top_board_lift=0, tubes_lift=0) {
 }
 
 
-//
-// BASE BOX
-//
+//  d8888b.  .d8b.  .d8888. d88888b      d8888b.  .d88b.  db    db
+//  88  `8D d8' `8b 88'  YP 88'          88  `8D .8P  Y8. `8b  d8'
+//  88oooY' 88ooo88 `8bo.   88ooooo      88oooY' 88    88  `8bd8'
+//  88~~~b. 88~~~88   `Y8b. 88~~~~~      88~~~b. 88    88  .dPYb.
+//  88   8D 88   88 db   8D 88.          88   8D `8b  d8' .8P  Y8.
+//  Y8888P' YP   YP `8888Y' Y88888P      Y8888P'  `Y88P'  YP    YP
 
 // Component: the box.
-module base_box() {
+module base_box(show_dovetails = true) {
   render(convexity=2)
   difference() {
     union() {
       box_empty();
+    }
+    if (enable_image) {
+      image_left_subtraction();
+      image_right_subtraction();
     }
     if (enable_mesh) {
       board_back_hollow(board_thickness * 1.5);
@@ -217,12 +239,26 @@ module base_box() {
     }
   }
 
-  if (enable_mesh) 
-        intersection() 
-        {
-            board_back_mesh();
-            board_back_hollow();
-        }
+  if (enable_dovetail && show_dovetails) {
+    base_box_dovetails();
+  }
+
+  if (enable_image) {
+    image_left();
+    image_right();
+  }
+
+  if (enable_mesh) {
+    intersection() {
+      board_back_mesh();
+      union() {
+        board_back_hollow();
+        box_back_fill();
+      }
+    }
+  } else {
+    box_back_fill();
+  }
 }
 
 function box_size(fatter=0, thicker=0, altitude=0, fronter=0, taller=0) =
@@ -268,6 +304,21 @@ module board_back_hollow(thicker=0) {
   box_move(fatter = -board_thickness - thicker)
   translate([0, xyz[1] + thicker/2, 0]) {
     cube([xyz[0], board_thickness + thicker, xyz[2]]);
+  }
+}
+module box_back_fill(thicker=0) {
+  cut_top_side(altitude = -thicker) {
+    box_back_fill_tall();
+  }
+}
+module box_back_fill_tall() {
+  linear_extrude(height=sorter_max_height, center=false, convexity=2)
+  translate([0, coin_padding*2])
+  difference() {
+    polygon(tube_cut_back_complete());
+    for (i = [0 : coin_max_index]) {
+      coin_hole_plain(i);
+    }
   }
 }
 
@@ -316,9 +367,66 @@ module cut_top_side(fatter=0, thicker=0, altitude=0) {
   }
 }
 
-//
-// MESH
-//
+
+//  d888888b .88b  d88.  d888b        dD  .88b  d88. d88888b .d8888. db   db
+//    `88'   88'YbdP`88 88' Y8b      d8'  88'YbdP`88 88'     88'  YP 88   88
+//     88    88  88  88 88          d8'   88  88  88 88ooooo `8bo.   88ooo88
+//     88    88  88  88 88  ooo    d8'    88  88  88 88~~~~~   `Y8b. 88~~~88
+//    .88.   88  88  88 88. ~8~   d8'     88  88  88 88.     db   8D 88   88
+//  Y888888P YP  YP  YP  Y888P   C8'      YP  YP  YP Y88888P `8888Y' YP   YP
+
+module image_left() {
+  translate([0, (board_width - image_left_size) / 2,
+             sorter_min_height * 0.4 - image_left_size / 2]) {
+    translate([1, image_left_size, image_left_size])
+    rotate([0, -90, 0])
+    rotate([0, 0, -90])
+    mirror([0, 1, 0])
+    resize([image_left_size, image_left_size, 1]) {
+      surface(file = str(image_dir, "TomHead_gray.1.dat"), convexity = 2);
+    }
+
+    translate([0, image_left_size-0.1, 0]) {
+      cube([1, (board_width - image_left_size) / 2 - board_thickness,
+            image_left_size]);
+    }
+  }
+}
+
+module image_left_subtraction() {
+  translate([0,
+             (board_width - image_left_size) / 2 + 0.01,
+             sorter_min_height * 0.4 - image_left_size / 2 + 0.01]) {
+    cube([0.99, image_left_size - 0.02, image_left_size - 0.02]);
+  }
+}
+
+module image_right() {
+  translate([board_length - 1,
+             (board_width - image_right_size) / 2,
+             sorter_max_height * 0.37 - image_right_size / 2]) {
+    translate([0, 0, image_right_size])
+    rotate([0, 90, 0])
+    rotate([0, 0, 90])
+    mirror([0, 1, 0])
+    resize([image_right_size, image_right_size, 1]) {
+      surface(file = str(image_dir, "Jerry_bw.dat"), convexity = 2);
+    }
+
+    translate([0, image_right_size-0.1, 0]) {
+      cube([1, (board_width - image_right_size) / 2 - board_thickness,
+            image_right_size]);
+    }
+  }
+}
+
+module image_right_subtraction() {
+  translate([board_length - 0.99,
+             (board_width - image_right_size) / 2 + 0.01,
+             sorter_max_height * 0.37 - image_right_size / 2 + 0.01]) {
+    cube([1, image_right_size - 0.02, image_right_size - 0.02]);
+  }
+}
 
 module board_back_mesh() {
   diag_len = sqrt(board_length * board_length +
@@ -388,9 +496,13 @@ module board_back_mesh_ancient_coins(
   }
 }
 
-//
-// TOP BOARD
-//
+
+//  d888888b  .d88b.  d8888b.      d8888b.  .d88b.   .d8b.  d8888b. d8888b.
+//  `~~88~~' .8P  Y8. 88  `8D      88  `8D .8P  Y8. d8' `8b 88  `8D 88  `8D
+//     88    88    88 88oodD'      88oooY' 88    88 88ooo88 88oobY' 88   88
+//     88    88    88 88~~~        88~~~b. 88    88 88~~~88 88`8b   88   88
+//     88    `8b  d8' 88           88   8D `8b  d8' 88   88 88 `88. 88  .8D
+//     YP     `Y88P'  88           Y8888P'  `Y88P'  YP   YP 88   YD Y8888D'
 
 // Component: the solid board on top.
 module top_board() {
@@ -426,6 +538,11 @@ module top_board() {
                     base_box (false);
         }
     }
+    // the femail dovetails
+    if (enable_dovetail && false) {
+      top_board_dovetails();
+    }
+
     // holes and cuts
     for (i = [0 : coin_max_index]) {
       coin_hole(i, bigger_r=coin_padding_top_board-coin_padding);
@@ -489,9 +606,103 @@ module untransform_top_board(lift_z=0) {
   }
 }
 
-//
-// COIN CUT
-//
+
+//  d8888b.  .d88b.  db    db d88888b d888888b  .d8b.  d888888b db
+//  88  `8D .8P  Y8. 88    88 88'     `~~88~~' d8' `8b   `88'   88
+//  88   88 88    88 Y8    8P 88ooooo    88    88ooo88    88    88
+//  88   88 88    88 `8b  d8' 88~~~~~    88    88~~~88    88    88
+//  88  .8D `8b  d8'  `8bd8'  88.        88    88   88   .88.   88booo.
+//  Y8888D'  `Y88P'     YP    Y88888P    YP    YP   YP Y888888P Y88888P
+
+// Component: male dovetails on the base box
+module base_box_dovetails() {
+  render()
+  intersection() {
+    all_male_dovetails_too_long();
+    box_empty_tall();
+  }
+}
+
+// Component: female dovetails on the top board
+module top_board_dovetails() {
+  render()
+  intersection() {
+    all_female_dovetails_too_long();
+    box_empty_tall(thicker=dovetail_femail_margin);
+  }
+}
+
+// Submodule: a male dovetail.
+module my_male_dovetail(
+    rotate_x, rotate_y, rotate_z, thickness, max_width, min_width) {
+  rotate([rotate_x, rotate_y, rotate_z]) {
+    translate([0, -0.01, 0]) {
+      male_dovetail(
+          max_width=max_width, min_width=min_width,
+          depth=board_thickness+0.01, height=thickness,
+          cutout_width=0, cutout_depth=0);
+    }
+  }
+}
+
+// Submodule: a female dovetail.
+module my_female_dovetail(
+    rotate_x, rotate_y, rotate_z, thickness, max_width, min_width) {
+  rotate([rotate_x, rotate_y, rotate_z]) {
+    translate([0, -0.01, 0]) {
+      female_dovetail_negative(
+          max_width=max_width, min_width=min_width,
+          depth=board_thickness+0.02, height=thickness,
+          clearance=dovetail_femail_margin);
+    }
+  }
+}
+
+// Submodule: all the too-long male dovetail on the base box
+module all_male_dovetails_too_long() {
+  transform_top_board(sorter_min_height) {
+    translate([0, board_width / 2, 0]) {
+      my_male_dovetail(90, 0, 90, board_length * 2,
+                       dovetail_side_max_width, dovetail_side_min_width);
+    }
+    for (i = [1 : dovetail_count]) {
+      translate([
+          board_length * (i-0.5) / dovetail_count / cos(board_primary_slope),
+          board_width + board_thickness,
+          0]) {
+        my_male_dovetail(90, 0, 0, board_thickness * 2,
+                         dovetail_back_max_width, dovetail_back_min_width);
+      }
+    }
+  }
+}
+
+// Submodule: all the too-long female dovetail on the top board
+module all_female_dovetails_too_long() {
+  transform_top_board(sorter_min_height) {
+    translate([0, board_width / 2, 0]) {
+      my_female_dovetail(90, 0, 90, board_length * 2,
+                         dovetail_side_max_width, dovetail_side_min_width);
+    }
+    for (i = [1 : dovetail_count]) {
+      translate([
+          board_length * (i-0.5) / dovetail_count / cos(board_primary_slope),
+          board_width + board_thickness * 2,
+          0]) {
+        my_female_dovetail(90, 0, 0, board_thickness * 4,
+                           dovetail_back_max_width, dovetail_back_min_width);
+      }
+    }
+  }
+}
+
+
+//   .o88b.  .d88b.  d888888b d8b   db       .o88b. db    db d888888b
+//  d8P  Y8 .8P  Y8.   `88'   888o  88      d8P  Y8 88    88 `~~88~~'
+//  8P      88    88    88    88V8o 88      8P      88    88    88
+//  8b      88    88    88    88 V8o88      8b      88    88    88
+//  Y8b  d8 `8b  d8'   .88.   88  V888      Y8b  d8 88b  d88    88
+//   `Y88P'  `Y88P'  Y888888P VP   V8P       `Y88P' ~Y8888P'    YP
 
 // Submodule: the coin holes.
 module coin_hole(n, bigger_r=0) {
@@ -546,10 +757,12 @@ module slope_cut_for_coin(n, bigger_r=0) {
   }
 }
 
-
-//
-// COIN TUBE
-//
+//   .o88b.  .d88b.  d888888b d8b   db      d888888b db    db d8888b. d88888b
+//  d8P  Y8 .8P  Y8.   `88'   888o  88      `~~88~~' 88    88 88  `8D 88'
+//  8P      88    88    88    88V8o 88         88    88    88 88oooY' 88ooooo
+//  8b      88    88    88    88 V8o88         88    88    88 88~~~b. 88~~~~~
+//  Y8b  d8 `8b  d8'   .88.   88  V888         88    88b  d88 88   8D 88.
+//   `Y88P'  `Y88P'  Y888888P VP   V8P         YP    ~Y8888P' Y8888P' Y88888P
 
 // Component: the tubes.
 module tubes() {
@@ -693,7 +906,7 @@ module tube_scales() {
         translate([coin_center_x(i),
                    tube_front_cut_y() - 1,
                    j * coins_thickness[i] - tubes_scale_height / 2]) {
-          length_offset = (j%10==0 ? 3 : j%scale_ticks==0 ? 1 : -0.5);
+          length_offset = (j%10==0 ? 3 : j%2==0 ? 1 : -0.5);
           cube([tube_cut_half_width(i) + length_offset,
                 tubes_scale_depth + 1,
                 tubes_scale_height]);
@@ -713,9 +926,13 @@ module tube_scale_replenishment() {
   }
 }
 
-//
-// FUNCTIONS
-//
+
+//  d88888b  db    db  d8b   db   .o88b.  .d8888.
+//  88'      88    88  888o  88  d8P  Y8  88'  YP
+//  88ooo    88    88  88V8o 88  8P       `8bo.
+//  88~~~    88    88  88 V8o88  8b         `Y8b.
+//  88       88b  d88  88  V888  Y8b  d8  db   8D
+//  YP       ~Y8888P'  VP   V8P   `Y88P'  `8888Y'
 
 // Accumulated coins' diameters.
 function sum_coins_d(first_n=coin_count) =
@@ -766,6 +983,11 @@ function tube_cut_back_xys(first_n=coin_count) =
   concat(tube_cut_back_xys(first_n - 1),
          tube_cut_back_xy_xy(first_n - 1));
 
+function tube_cut_back_complete() =
+  concat([[tube_left_x()+tubes_back_thinner, tube_back_y()]],
+         tube_cut_back_xys(),
+         [[tube_right_x()-tubes_back_thinner, tube_back_y()]]);
+
 // Tube connections.
 function tube_height_at(x) =
   sorter_min_height - tubes_shorter - tubes_base_thickness
@@ -778,3 +1000,62 @@ function tube_connection_height(n) =
   sorter_min_height - tubes_shorter - tubes_base_thickness + (
     n == 0 ? 0:
     coin_center_x(n-1) * tan(board_primary_slope));
+
+
+// From: https://github.com/hugokernel/OpenSCAD_Dovetail.git
+//
+//  d8888b.  .d88b.  db    db d88888b d888888b  .d8b.  d888888b db
+//  88  `8D .8P  Y8. 88    88 88'     `~~88~~' d8' `8b   `88'   88
+//  88   88 88    88 Y8    8P 88ooooo    88    88ooo88    88    88
+//  88   88 88    88 `8b  d8' 88~~~~~    88    88~~~88    88    88
+//  88  .8D `8b  d8'  `8bd8'  88.        88    88   88   .88.   88booo.
+//  Y8888D'  `Y88P'     YP    Y88888P    YP    YP   YP Y888888P Y88888P
+
+module female_dovetail_negative(max_width=11, min_width=5, depth=5, height=30, clearance=0.25) {
+  union() {
+    translate([0,-0.001,-0.05])
+      dovetail_3d(max_width+clearance,min_width+clearance,depth,height+0.1);
+      translate([-(max_width+clearance)/2, depth-0.002,-0.5])
+        cube([max_width+clearance,clearance/2,height+1]);
+  }
+}
+
+module female_dovetail(max_width=11, min_width=5, depth=5, height=30, block_width=15, block_depth=9, clearance=0.25) {
+    difference() {
+      translate([-block_width/2,0,0]) cube([block_width, block_depth, height]);
+      female_dovetail_negative(max_width, min_width, depth, height, clearance);
+    }
+}
+
+module male_dovetail(max_width=11, min_width=5, depth=5, height=30, cutout_width=5, cutout_depth=3.5) {
+  difference() {
+    dovetail_3d(max_width,min_width,depth,height);
+    translate([0.001,depth+0.001,-0.05])
+      dovetail_cutout(cutout_width, cutout_depth, height+0.1);
+  }
+}
+
+module dovetail_3d(max_width=11, min_width=5, depth=5, height=30) {
+  linear_extrude(height=height, convexity=2)
+    dovetail_2d(max_width,min_width,depth);
+}
+
+module dovetail_2d(max_width=11, min_width=5, depth=5) {
+  angle=atan((max_width/2-min_width/2)/depth);
+  //echo("angle: ", angle);
+  polygon(paths=[[0,1,2,3]], points=[[-min_width/2,0], [-max_width/2,depth], [max_width/2, depth], [min_width/2,0]]);
+}
+
+module dovetail_cutout(width=5, depth=4, height=30) {
+  translate([0,-depth+width/2,0])
+    union() {
+      translate([-width/2,0,0])
+        cube([width,depth-width/2,height]);
+      difference() {
+        cylinder(r=width/2, h=height, $fs=0.25);
+        translate([-width/2-0.05,0.05,-0.05]) cube([width+0.1,width+0.1,height+0.1]);
+      }
+    }
+}
+
+// http://patorjk.com/software/taag/#p=display&c=c%2B%2B&f=Basic&t=abc
