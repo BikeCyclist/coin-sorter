@@ -1,4 +1,4 @@
-/* Improved Auto Coin Sorter                        */
+/* Improved Auto Coin Sorter V2                     */
 /* https://www.thingiverse.com/thing:3203049        */
 /* by Bikecyclist                                   */
 /* https://www.thingiverse.com/Bikecyclist          */
@@ -12,7 +12,7 @@
 /* [General] */
 
 // Choose a currency you use.
-currency = "eur"; // [usd:USD - US dollar, eur:EUR - Euro, chf:CHF - Swiss franc, cad:CAD - Canadian dollar, thb:THB - Thai Baht, other:Other (See "Slot customization" tab above)]
+currency = "eur"; // [usd:USD - US dollar, eur:EUR - Euro, chf:CHF - Swiss franc, cad:CAD - Canadian dollar, sek:SEK- Swedish Krona, thb:THB - Thai Baht, other:Other (See "Slot customization" tab above)]
 
 // How tall is the the shortest tube? In millimeters:
 height = 50; // [10:150]
@@ -73,6 +73,8 @@ chf_coins = [[31.45, 27.40, 23.20, 21.05, 19.15, 18.20, 17.15],
              [ 2.35,  2.15,  1.15,  1.65,  1.45,  1.25,  1.25]];
 cad_coins = [[28.00, 27.13, 26.50, 23.88, 21.20, 19.05, 18.03],
              [ 1.80,  1.95,  1.75,  1.58,  1.76,  1.45,  1.22]];
+sek_coins = [[23.75, 22.50, 20.50, 19.50],
+             [ 1.97,  1.79,  1.79,  2.90]];             
 thb_coins = [[26.00, 24.05, 22.05, 20.01],
              [ 2.16,  2.13,  1.48,  1.38]];
 
@@ -98,6 +100,7 @@ coins = currency == "usd" ? usd_coins :
         currency == "eur" ? eur_coins :
         currency == "chf" ? chf_coins :
         currency == "cad" ? cad_coins :
+        currency == "sek" ? sek_coins :
         currency == "thb" ? thb_coins : other_coins;
 
 coins_d = coins[0];
