@@ -1,34 +1,10 @@
-/* Improved Auto Coin Sorter V8.01                  */
-/* - Merged V7.61R and V8                           */
+/* Improved Auto Coin Sorter V7.7                   */
+/* - Topboard flanks are now vertical               */
+/* - Better line-up of back guard - thanks to af12689!             */
+/* - https://www.prusaprinters.org/de/social/192622-af12689/about  */
+/* - Option to print tubes with witness holes       */
 /*                                                  */
 /* Version History                                  */
-/*                                                  */
-/* Improved Auto Coin Sorter V7.61R                 */
-/* - Topboard flanks are now vertical               */
-/* - Better placement of rear guard rail            */
-/* - Topboard has ribs to hold tuberack in place    */
-/*                                                  */
-/* Improved Auto Coin Sorter V7.54                  */
-/* - Includes COP Columbian Peso                    */
-/* - Coin tube spacing slightly increased           */
-/* - Default extra topboard length decreased        */
-/* - Slight correction of US 1 Cent coin thickness  */
-/* by Bikecyclist                                   */
-/* https://www.thingiverse.com/Bikecyclist          */
-/*                                                  */
-/* Improved Auto Coin Sorter V7.53b                 */
-/* - Cleaned up some redundant parameters           */
-/* - Introduced new parameter for back wall height  */
-/* - Includes DEM Deutsche Mark                     */
-/* by Bikecyclist                                   */
-/* https://www.thingiverse.com/Bikecyclist          */
-/*                                                  */
-/* Improved Auto Coin Sorter V7.52                  */
-/* - Rounded corners on coin rack                   */
-/* - Includes UYU Uruguayan Peso                    */
-/*                                                  */
-/* Improved Auto Coin Sorter V7.51                  */
-/* - Test to check customizer's underscore handling */
 /*                                                  */
 /* Improved Auto Coin Sorter V7.5                   */
 /* - Includes KRW South Korean Won                  */
@@ -36,12 +12,10 @@
 /* - Includes MYR Malaysian Ringgit                 */
 /* - Includes NZD New Zealand Dollar                */
 /*                                                  */
-/* Version History                                  */
-/*                                                  */
 /* Improved Auto Coin Sorter V7.41                  */
 /* - Customizer syntax error fixed                  */
-/* - Coin - roll and "classic" slot versions        */
-/* - Custom currency support re - introduced        */
+/* - Coin-roll and "classic" slot versions          */
+/* - Custom currency support re-introduced          */
 /* - New contoured back                             */
 /* - Front tube rack retaining edge                 */
 /* - Basebox can be printed upright now             */
@@ -88,7 +62,7 @@
 /* https://www.thingiverse.com/thing:3467834        */
 /* - Includes Features from Compact Version         */
 /* - Coin roll support looks at more details        */
-/* - Coin tube base chamfered (anti - elephant)     */
+/* - Coin tube base chamfered (anti-elephant)       */
 /* - Coin tube base bottom marked with index number */
 /* - New style of base box backside pattern added   */
 /* - Topboard tolerance added                       */
@@ -203,547 +177,551 @@
 //
 // KRW
 // https://www.thingiverse.com/thing:3557926
-// by
+// by 
 // https://www.thingiverse.com/alien9519
 //
 // MKD
 // https://www.thingiverse.com/thing:3552088
-// by
+// by 
 // https://www.thingiverse.com/Karevski
 //
 // MYR
 // https://www.thingiverse.com/make:643395
-// by
+// by 
 // https://www.thingiverse.com/wmfhadi
 //
 // NIS
 // https://www.thingiverse.com/thing:2152362
-// by
+// by 
 // https://www.thingiverse.com/Esh_Robotics
 //
 // NOK
 // https://www.thingiverse.com/thing:1024392
-// by
+// by 
 // https://www.thingiverse.com/RolBerg
 //
 // RON
 // https://www.thingiverse.com/thing:2109232
-// by
+// by 
 // https://www.thingiverse.com/szilveszter
 //
 // TWD
 // https://www.thingiverse.com/thing:1671027
-// by
+// by 
 // https://www.thingiverse.com/osmiumtpe
 //
 // XPF
 // https://www.thingiverse.com/thing:1821933
-// by
+// by 
 // https://www.thingiverse.com/M2orea
 
 /* [General] */
 
 // Choose a currency you use.
-currency = 8; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 36:COP - Columbian Peso, 6:CZK - Czech Koruna, 35:DEM - Deutsche Mark, 7:DKK - Danish Krone, 8:EUR - Euro, 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 32: KRW - South Korean Won, 31:MKD - Macedonian Denar, 16:MXN - Mexican Peso, 33: MYR - Malaysian Ringgit, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 30: NZD - New Zealand Dollar, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 34:UYU - Uruguayan Peso, 29:XFP - CFP Franc]
+currency = 34; // [-1:Custom - Define Coins in Custom Currency Tab, 0:ARS - Argentine Peso, 1:AUD - Australian Dollar, 2:BRL - Brazilian Real, 3:CAD - Canadian dollar, 4:CHF - Swiss Franc, 5:CLP - Chilean Peso, 6:CZK - Czech Koruna, 7:DKK - Danish Krone, 8:EUR - Euro, 34: EUR Euro (short), 9:GBP - British Pounds, 10: HKD - Hong Kong Dollar, 11: HUF - Hungarian Forint, 12:IDR - Indonesian Rupiah, 13:INR Indian Rupee, 14: ISK - Icelandic Krona, 15:JPY - Japanese Yen, 32: KRW - South Korean Won, 31:MKD - Macedonian Denar, 16:MXN - Mexican Peso, 33: MYR - Malaysian Ringgit, 17: NIS - Israeli New Shekel, 18: NOK - Norwegian Krone, 30: NZD - New Zealand Dollar, 19:PEN - Peruvian Sol, 20:PLN - Polish Zloty, 21: RON - Rumanian Leu, 22:RUB - Russian Ruble, 23:SEK - Swedish Krona, 24:SGD - Singapore Dollar, 25:THB - Thai Baht, 26:TRY - Turkish Lira, 27:TWD - New Taiwan Dollar, 28:USD - US dollar, 29:XFP - CFP Franc]
+
 
 // Choose Coin Roll vs. Classic Slot Version
 coin_roll_version = 1; // [1: Coin Roll Version, 2:Classic Slot Version]
+
+// If Coin Roll Version is chosen: Would you like witness holes in the coin tubes?
+witness_holes = false;
+
+// How much height to add to the default for the shortest tube? In millimeters:
+tube_extra_height = 0; // [-100:150]
 
 // How much extra topboard length for placing the coins on the sorter? (In millimeters.):
 extra_topboard_length = 30; // [0:60]
 
 // Style of vertical guard
-guardstyle = "Frontandback";  // [Frontandback:Front and back guard rails, Frontguard: Front guard rail only]
+guard_style = "Front_and_back";  // [Front_and_back:Front and back guard rails, Front_guard: Front guard rail only]
 
 // How much extra height on the right hand side of the guard rail? In millimeters:
-extra_guard_height = 15; // [0:30]
+extra_guard_height = 10; // [0:30]
+
+// What's the height of the guard rail elsewhere? In millimeters:
+normal_guard_height = 3; // [5:30]
 
 // Topboard bottom rim height. (Holds topboard on.)
-topboard_rim = 15; //[10:25]
+topboard_rim = 5; //[10:25]
 
 // Topboard bottom rim width.
-topboardrimwidth = 5; //[2:10]
-
-// Offset value used for rounding tube rack corners (normally no need to change)
-roundoffset = 1; // [0:2]
+topboard_rimwidth = 5; //[2:10]
 
 // Which parts would you like to see?
-part = "allunassembled"; // [allassembled:All parts assembled, allunassembled:All parts unassembled, basebox:Base box only,topboard:Top board only, tuberack:Tube rack only, tubes:Tubes only]
+part = "all_assembled"; // [all_assembled:All parts assembled, all_unassembled:All parts unassembled, basebox:Base box only,topboard:Top board only, tuberack:Tube rack only, tubes:Tubes only]
 
 /* [Custom Currency] */
 
-// Enter ISO 4217 code for custom currency - see https://en.wikipedia.org/wiki/ISO4217#Activecodes
+// Enter ISO 4217 code for custom currency - see https://en.wikipedia.org/wiki/ISO_4217#Active_codes
 custom_currency_code = "ABC";
 
 // Diameter of largest coin (0 to skip this coin)
-coin01dia = 10.01;
+coin_01_dia = 10.01;
 // Thickness of largest coin
-coin01th = 1.01;
+coin_01_th = 1.01;
 // Number of coins in a coin tube (for this coin)
-coin01n = 25;
+coin_01_n = 25;
 
 // Diameter of 2nd largest coin (0 to skip this coin)
-coin02dia = 9.01;
+coin_02_dia = 9.01;
 // Thickness of this coin
-coin02th = 1.01;
+coin_02_th = 1.01;
 // Number of coins in a coin tube (for this coin)
-coin02n = 25;
+coin_02_n = 25;
 
 // Diameter of 3rd largest coin (0 to skip this coin)
-coin03dia = 8.01;
+coin_03_dia = 8.01;
 // Thickness of this coin
-coin03th = 1.01;
+coin_03_th = 1.01;
 // Number of coins in a coin tube (for this coin)
-coin03n = 25;
+coin_03_n = 25;
 
 // Diameter of 4th largest coin (0 to skip this coin)
-coin04dia = 7.01;
+coin_04_dia = 7.01;
 // Thickness of this coin
-coin04th = 1.01;
+coin_04_th = 1.01;
 // Number of coins in a coin tube (for this coin)
-coin04n = 50;
+coin_04_n = 50;
 
 // Diameter of 5th largest coin (0 to skip this coin)
-coin05dia = 0.00;
+coin_05_dia = 0.00;
 // Thickness of this coin
-coin05th = 1.01;
+coin_05_th = 1.01;
 // Number of coins in a coin tube (for this coin)
-coin05n = 50;
+coin_05_n = 50;
 
 // Diameter of 6th largest coin (0 to skip this coin)
-coin06dia = 0.00;
+coin_06_dia = 0.00;
 // Thickness of this coin
-coin06th = 1.01;
+coin_06_th = 1.01;
 // Number of coins in a coin tube (for this coin)
-coin06n = 50;
+coin_06_n = 50;
 
 // Diameter of 7th largest coin (0 to skip this coin)
-coin07dia = 0.00;
+coin_07_dia = 0.00;
 // Thickness of this coin
-coin07th = 1.01;
+coin_07_th = 1.01;
 // Number of coins in a coin tube (for this coin)
-coin07n = 50;
+coin_07_n = 50;
 
 // Diameter of 8th largest coin (0 to skip this coin)
-coin08dia = 0.00;
+coin_08_dia = 0.00;
 // Thickness of this coin
-coin08th = 1.01;
+coin_08_th = 1.01;
 // Number of coins in a coin tube (for this coin)
-coin08n = 50;
+coin_08_n = 50;
 
 // Diameter of 9th largest coin (0 to skip this coin)
-coin09dia = 0.00;
+coin_09_dia = 0.00;
 // Thickness of this coin
-coin09th = 1.01;
+coin_09_th = 1.01;
 // Number of coins in a coin tube (for this coin)
-coin09n = 50;
+coin_09_n = 50;
 
 // Diameter of 10th largest coin (0 to skip this coin)
-coin10dia = 0.00;
+coin_10_dia = 0.00;
 // Thickness of this coin
-coin10th = 1.01;
+coin_10_th = 1.01;
 // Number of coins in a coin tube (for this coin)
-coin10n = 50;
+coin_10_n = 50;
 
+// Enter default length of shortest tube
+default_shortest = 75;
+
+     
 /* [Hidden] */
 
-allcoins = [
-	["ARS",
-		[26.00, 25.00, 24.00, 19.00],
-		[ 2.15,  2.00,  1.75,  1.35],
-		[   25,    25,    50,    50],
-	],
+all_coins = [
+            ["ARS",
+             [26.00, 25.00, 24.00, 19.00],
+             [ 2.15,  2.00,  1.75,  1.35],
+             [   25,    25,    50,    50],
+             95],
+             
+            // Source: Wikipedia
+            ["AUD",
+             [ 31.65, 28.65, 25.00, 23.60, 20.50, 19.41],
+             [  2.80,  2.50,  3.00,  2.00,  2.80,  1.30],
+             [    25,    25,    25,    50,    25,    50],
+             90],
+             
+            ["BRL",
+             [  27,     25,  23.50,    23,    22,    22,    21,    20],
+             [ 1.95,  2.25,   1.40,  2.85,  1.65,  1.20,  1.20,  2.23],
+             [   25,    25,     50,    25,    50,    50,    50,    50],
+             80],
 
-	// Source: Wikipedia
-	["AUD",
-		[ 31.65, 28.65, 25.00, 23.60, 20.50, 19.41],
-		[  2.80,  2.50,  3.00,  2.00,  2.80,  1.30],
-		[    25,    25,    25,    50,    25,    50],
-	],
+            ["CAD", 
+             [28.00, 27.13, 26.50, 23.88, 21.20, 19.05, 18.03],
+             [ 1.80,  1.95,  1.75,  1.58,  1.76,  1.45,  1.22],
+             [   25,    25,    50,    50,    50,    50,    50],
+             90],
+            
+            ["CHF",  
+             [31.45, 27.40, 23.20, 21.05, 19.15, 18.20, 17.15],
+             [ 2.35,  2.15,  1.15,  1.65,  1.45,  1.25,  1.25],
+             [   25,    25,    50,    50,    50,    50,    50],
+             75],
+             
+            ["CLP",
+             [ 26.94, 25.52,  23.5,  21.08],
+             [  2.00,  2.00,  2.33,   1.46],
+             [    25,    25,    25,     50],
+             75],
+             
+            ["CZK",
+             [ 27.50,    26,  24.5,    23,  21.5,    20],
+             [  2.55,  2.55,  2.55,  1.85,  1.85,  1.85],
+             [    25,    25,    25,    50,    50,    50],
+             90],
+            
+            ["DKK",
+             [ 28.5,  27.00,  24.5,  23.35,  21.5,  20.25],
+             [  2.0,   2.35,   1.8,    2.3,  1.55,    1.6],
+             [   25,     25,    50,     25,    50,     50],
+             90],
 
-	["BRL",
-		[  27,     25,  23.50,    23,    22,    22,    21,    20],
-		[ 1.95,  2.25,   1.40,  2.85,  1.65,  1.20,  1.20,  2.23],
-		[   25,    25,     50,    25,    50,    50,    50,    50],
-	],
+            ["EUR",
+//             2.00   0.50   1.00   0.20   0.05   0.10   0.02   0.01
+             [25.75, 24.25, 23.25, 22.25, 21.25, 19.75, 18.75, 16.25],
+             [ 2.20,  2.38,  2.33,  2.14,  1.67,  1.93,  1.67,  1.67],
+             [   25,    20,    25,    40,    50,    40,    50,    50],
+             80],
+            
+            ["GBP", 
+             [28.5,	27.5, 25.9, 24.5, 23.5, 21.4, 20.3, 18.0],
+             [2.5, 1.78, 2.03, 1.85, 3.15,  1.7, 1.65, 1.70],
+             [ 25,   25,   25,   50,   25,   50,   50,   50],
+             90],
+             
+            ["HKD",
+             [   28, 27.00,  25.5,  24,  22.50,    19,  17.5],
+             [ 2.03,  3.26,  1.95,   3,   1.72,  1.52,  1.15],
+             [   25,    25,    25,  25,     50,    50,    50],
+             95],
+             
+            ["HUF",
+             [ 28.3,  27.4,  26.3,  24.8,  23.8,  21.2],
+             [    2,   1.7,   1.9,   1.3,   2.2,   1.3],
+             [   25,    50,    50,    50,    50,    50],
+             95],
+             
+            ["IDR",
+             [ 27.2,  25,   24,   23],
+             [  2.3, 2.1,  1.5,  1.9],
+             [   25,  25,   50,   50],
+             90],
+             
+            ["INR",
+             [  28,   25,   23,   22],
+             [ 1.8,  1.4,  2.5,  1.3],
+             [   25,  25,   25,   50],
+             70],
+             
+             // Source: Wikipedia
+             ["ISK",
+//               10    100      5     50      1
+             [27.50, 25.50, 24.50, 23.00, 21.50],
+             [ 1.78,  2.25,  1.75,  2.60,  1.66],
+             [   25,    25,    25,    25,    50],
+             70],
 
-	["CAD",
-		[28.00, 27.13, 26.50, 23.88, 21.20, 19.05, 18.03],
-		[ 1.80,  1.95,  1.75,  1.58,  1.76,  1.45,  1.22],
-		[   25,    25,    50,    50,    50,    50,    50],
-	],
+            ["JPY",
+             [26.5,  23.5,  22.6,  22.0,  21.0,  20.0],
+             [ 1.8,   1.5,   1.7,   1.5,   1.7,   1.5],
+             [   25,   50,    50,    50,    50,    50],
+             90],
 
-	["CHF",
-		[31.45, 27.40, 23.20, 21.05, 19.15, 18.20, 17.15],
-		[ 2.35,  2.15,  1.15,  1.65,  1.45,  1.25,  1.25],
-		[   25,    25,    50,    50,    50,    50,    50],
-	],
+            ["MXN",
+             [  32,     28,  25.5,    23,   21,   17],
+             [ 2.15,  2.00,  1.75,  1.95,  1.8,  1.7],
+             [   25,    25,    50,    50,   50,   50],
+             90],
+             
+            ["NIS",
+             [  26,   24,   23,   22,  21.6,   18],
+             [ 1.6,  2.4,  2.2,  1.5,   2.3,  2.1],
+             [  25,   25,   25,   50,    25,   50],
+             90],
 
-	["CLP",
-		[ 26.94, 25.52,  23.5,  21.08],
-		[  2.00,  2.00,  2.33,   1.46],
-		[    25,    25,    25,     50],
-	],
+            ["NOK",
+             [ 27.5,  26,  24,  21],
+             [  2.2,   2,   2, 1.7],
+             [  25,   25,  25,  50],
+             80],
+             
+            ["PEN",
+             [25.50, 24.38, 23.00, 22.30, 22.00, 20.50, 18.00],
+             [ 1.65,  2.13,  1.26,  2.07,  1.65,  1.26,  1.26],
+             [   25,    25,    50,    50,    50,    50,    50],
+             90],
+             
+            ["PLN",
+             [24.00, 23.00, 21.50, 20.50, 19.50, 18.50, 17.50, 16.50, 15.50],
+             [ 2.00,  1.70,  2.00,  1.70,  1.40,  1.70,  1.40,  1.70,  1.40],
+             [   25,    25,    25,    50,    50,    50,    50,    50,    50],
+             75],
+             
+            ["RON",
+             [ 23.7,  20.35,  18.13,  16.75],
+             [ 1.82,   1.75,    1.6,   1.57],
+             [   25,     25,     25,     50],
+             80],
 
-	["CZK",
-		[ 27.50,    26,  24.5,    23,  21.5,    20],
-		[  2.55,  2.55,  2.55,  1.85,  1.85,  1.85],
-		[    25,    25,    25,    50,    50,    50],
-	],
+            ["RUB",
+             [25.08, 23.17, 22.10, 20.56, 19.47, 17.55],
+             [ 1.90,  1.84,  2.25,  1.40,  1.45,  1.23],
+             [   25,    25,    25,    50,    50,    50],
+             70],
+             
+            ["SEK",             
+             [23.75, 22.50, 20.50, 19.50],
+             [ 1.97,  1.79,  1.79,  2.90],
+             [   25,    25,    25,    25],
+             70],
+            
+             // Source: Wikipedia
+             ["SGD",
+//             1.00   0.50   0.20   0.10   0.05
+             [24.65, 23.00, 21.00, 18.50, 16.75],
+             [ 2.50,  2.45,  1.72,  1.38,  1.22],
+             [   25,    25,    50,    50,    50],
+             90],
 
-	["DKK",
-		[ 28.5,  27.00,  24.5,  23.35,  21.5,  20.25],
-		[  2.0,   2.35,   1.8,    2.3,  1.55,    1.6],
-		[   25,     25,    50,     25,    50,     50],
-	],
+            ["THB",
+             [26.00, 24.05, 22.05, 20.01],
+             [ 2.16,  2.13,  1.48,  1.38],
+             [   20,    20,    50,    50],
+             70],
+             
+             // Source: Wikipedia
+            ["TRY",
+//             1.00   0.50   0.25   0.10   0.05   0.01
+             [26.15, 23.85, 20.50, 18.50, 17.50, 16.50],
+             [ 1.90,  1.90,  1.65,  1.65,  1.65,  1.35],
+             [   25,    25,    50,    50,    50,    50],
+             85],
+             
+            ["TWD",
+             [ 28,    26,   22 ,  20],
+             [ 2.4,  1.9,  1.6,  1.6],
+             [  25,   25,   50,   50],
+             85],
 
-	["EUR",
-		//2.00   0.50   1.00   0.20   0.05   0.10   0.02   0.01
-		[25.75, 24.25, 23.25, 22.25, 21.25, 19.75, 18.75, 16.25],
-		[ 2.20,  2.38,  2.33,  2.14,  1.67,  1.93,  1.67,  1.67],
-		[   25,    20,    25,    40,    50,    40,    50,    50],
-	],
+            ["USD",
+//             0.50   1.00   0.25   0.05   0.01   0.10
+             [30.61, 26.50, 24.26, 21.21, 19.05, 17.91],
+             [ 2.15,  2.00,  1.75,  1.95,  1.55,  1.35],
+             [   20,    25,    40,    40,    50,    50],
+             75],
+             
+            ["XFP",
+             [   33,    31,  29.89,  28.48,  27.02,  23.95,    23],
+             [ 2.37,  2.24,   1.98,   2.14,   1.76,   1.84,  1.43],
+             [   25,    25,     25,     25,     50,     50,    50],
+             80],
+             
+             // Source: Wikipedia
+             ["NZD",
+//              200     50    100     20     10
+             [26.50, 24.75, 23.00, 21.75, 20.50],
+             [ 2.70,  1.70,  2.74,  1.56,  1.58],
+             [   25,    25,    25,    50,    50],
+             90],
+             
+             ["MKD",
+             [27.50, 26.70, 25.50, 24.58, 23.90],
+             [ 1.80,  1.90,  1.80,  2.07,  1.78],
+             [   25,    25,    25,    25,    50],
+             80],
+             
+             ["KRW",
+             [27.00, 24.50, 22.00, 18.50],
+             [ 1.92,  1.75,  1.60,  1.60],
+             [   25,    25,    50,    50],
+             85],
+             
+             ["MYR",
+             [27.76, 23.59, 22.65, 20.60, 19.40, 18.80,  17.78],
+             [ 2.18,  1.75,  1.92,  1.75,  1.37,  1.50,   1.30],
+             [   25,    25,    25,    50,    50,    50,     50],
+             85],
+             
+             ["EUR Short",
+//             0.20   0.05   0.10   0.02   0.01
+             [22.25, 21.25, 19.75, 18.75, 16.25],
+             [ 2.14,  1.67,  1.93,  1.67,  1.67],
+             [   40,    50,    40,    50,    50],
+             95]
 
-	["GBP",
-		[28.5,	27.5, 25.9, 24.5, 23.5, 21.4, 20.3, 18.0],
-		[2.5, 1.78, 2.03, 1.85, 3.15,  1.7, 1.65, 1.70],
-		[ 25,   25,   25,   50,   25,   50,   50,   50],
-	],
+             ];
 
-	["HKD",
-		[   28, 27.00,  25.5,  24,  22.50,    19,  17.5],
-		[ 2.03,  3.26,  1.95,   3,   1.72,  1.52,  1.15],
-		[   25,    25,    25,  25,     50,    50,    50],
-	],
-
-	["HUF",
-		[ 28.3,  27.4,  26.3,  24.8,  23.8,  21.2],
-		[    2,   1.7,   1.9,   1.3,   2.2,   1.3],
-		[   25,    50,    50,    50,    50,    50],
-	],
-
-	["IDR",
-		[ 27.2,  25,   24,   23],
-		[  2.3, 2.1,  1.5,  1.9],
-		[   25,  25,   50,   50],
-	],
-
-	["INR",
-		[  28,   25,   23,   22],
-		[ 1.8,  1.4,  2.5,  1.3],
-		[   25,  25,   25,   50],
-	],
-
-	// Source: Wikipedia
-	["ISK",
-		//  10    100      5     50      1
-		[27.50, 25.50, 24.50, 23.00, 21.50],
-		[ 1.78,  2.25,  1.75,  2.60,  1.66],
-		[   25,    25,    25,    25,    50],
-	],
-
-	["JPY",
-		[26.5,  23.5,  22.6,  22.0,  21.0,  20.0],
-		[ 1.8,   1.5,   1.7,   1.5,   1.7,   1.5],
-		[   25,   50,    50,    50,    50,    50],
-	],
-
-	["MXN",
-		[  32,     28,  25.5,    23,   21,   17],
-		[ 2.15,  2.00,  1.75,  1.95,  1.8,  1.7],
-		[   25,    25,    50,    50,   50,   50],
-	],
-
-	["NIS",
-		[  26,   24,   23,   22,  21.6,   18],
-		[ 1.6,  2.4,  2.2,  1.5,   2.3,  2.1],
-		[  25,   25,   25,   50,    25,   50],
-	],
-
-	["NOK",
-		[ 27.5,  26,  24,  21],
-		[  2.2,   2,   2, 1.7],
-		[  25,   25,  25,  50],
-	],
-
-	["PEN",
-		[25.50, 24.38, 23.00, 22.30, 22.00, 20.50, 18.00],
-		[ 1.65,  2.13,  1.26,  2.07,  1.65,  1.26,  1.26],
-		[   25,    25,    50,    50,    50,    50,    50],
-	],
-
-	["PLN",
-		[24.00, 23.00, 21.50, 20.50, 19.50, 18.50, 17.50, 16.50, 15.50],
-		[ 2.00,  1.70,  2.00,  1.70,  1.40,  1.70,  1.40,  1.70,  1.40],
-		[   25,    25,    25,    50,    50,    50,    50,    50,    50],
-	],
-
-	["RON",
-		[ 23.7,  20.35,  18.13,  16.75],
-		[ 1.82,   1.75,    1.6,   1.57],
-		[   25,     25,     25,     50],
-	],
-
-	["RUB",
-		[25.08, 23.17, 22.10, 20.56, 19.47, 17.55],
-		[ 1.90,  1.84,  2.25,  1.40,  1.45,  1.23],
-		[   25,    25,    25,    50,    50,    50],
-	],
-
-	["SEK",
-		[23.75, 22.50, 20.50, 19.50],
-		[ 1.97,  1.79,  1.79,  2.90],
-		[   25,    25,    25,    25],
-	],
-
-	// Source: Wikipedia
-	["SGD",
-		//1.00   0.50   0.20   0.10   0.05
-		[24.65, 23.00, 21.00, 18.50, 16.75],
-		[ 2.50,  2.45,  1.72,  1.38,  1.22],
-		[   25,    25,    50,    50,    50],
-	],
-
-	["THB",
-		[26.00, 24.05, 22.05, 20.01],
-		[ 2.16,  2.13,  1.48,  1.38],
-		[   20,    20,    50,    50],
-	],
-
-	// Source: Wikipedia
-	["TRY",
-		//1.00   0.50   0.25   0.10   0.05   0.01
-		[26.15, 23.85, 20.50, 18.50, 17.50, 16.50],
-		[ 1.90,  1.90,  1.65,  1.65,  1.65,  1.35],
-		[   25,    25,    50,    50,    50,    50],
-	],
-
-	["TWD",
-		[ 28,    26,   22 ,  20],
-		[ 2.4,  1.9,  1.6,  1.6],
-		[  25,   25,   50,   50],
-	],
-
-	["USD",
-		//0.50   1.00   0.25   0.05   0.01   0.10
-		[30.61, 26.50, 24.26, 21.21, 19.05, 17.91],
-		[ 2.15,  2.00,  1.75,  1.95,  1.55,  1.35],
-		[   20,    25,    40,    40,    50,    50],
-	],
-
-	["XFP",
-		[   33,    31,  29.89,  28.48,  27.02,  23.95,    23],
-		[ 2.37,  2.24,   1.98,   2.14,   1.76,   1.84,  1.43],
-		[   25,    25,     25,     25,     50,     50,    50],
-	],
-
-	// Source: Wikipedia
-	["NZD",
-		// 200     50    100     20     10
-		[26.50, 24.75, 23.00, 21.75, 20.50],
-		[ 2.70,  1.70,  2.74,  1.56,  1.58],
-		[   25,    25,    25,    50,    50],
-	],
-
-	["MKD",
-		[27.50, 26.70, 25.50, 24.58, 23.90],
-		[ 1.80,  1.90,  1.80,  2.07,  1.78],
-		[   25,    25,    25,    25,    50],
-	],
-
-	["KRW",
-		[27.00, 24.50, 22.00, 18.50],
-		[ 1.92,  1.75,  1.60,  1.60],
-		[   25,    25,    50,    50],
-	],
-
-	["MYR",
-		[27.76, 23.59, 22.65, 20.60, 19.40, 18.80,  17.78],
-		[ 2.18,  1.75,  1.92,  1.75,  1.37,  1.50,   1.30],
-		[   25,    25,    25,    50,    50,    50,     50],
-	],
-
-	["UYU",
-		[ 28, 26, 23, 20],
-		[  3,  2,  2,  2],
-		[ 25, 25, 50, 50],
-	],
-    
-    ["DEM",
-//        5.00   2.00   1.00   0.10   0.50   0.02   0.05   0.01
-        [29.00, 26.75, 23.50, 21.50, 20.00, 19.25, 18.50, 16.50],
-        [ 2.07,  1.79,  1.79,  1.70,  1.58,  1.52,  1.70,  1.38],
-        [   40,    50,    50,    50,    50,    50,    50,    50],
-    ],
-
- // Source: Wikipedia, Coins since 2012
- // (No thickness for 1000 Peso coin given)
-     ["COP",
-//     1000   500   200   100    50
-     [ 26.7, 23.7, 22.4, 20.3 , 17.0],
-     [  2  ,  2.0,  1.7,  1.55,  1.3],
-     [   25,   25,   50,   50,    50],
-    ]
-];
-
-sqrt2 = sqrt(2);
-
-echo (allcoins[currency]);
-
-//
-// Hidden Obsolescent Parameters
-//
-
-// Choose a pattern for the back side.
-pattern = "no"; // [no:Solid with contoured back, chncoin:Chinese ancient coin pattern, mesh:Mesh pattern]
-
-// If a back side pattern is selected, should it be filled in?
-pattern_fill = "yes"; // [yes:filled - in back, no:open back]
-
-// Choose the desired mesh thickness. In millimeters:
-mesh_thickness = 0.8;
+echo (all_coins [currency]);
 
 //
 // MAIN
 //
-othercoinsdt =
+height = currency>=0?
+    tube_extra_height + all_coins [currency][4]:
+    tube_extra_height + default_shortest;
+
+
+other_coins_d_t =
 [
-	[coin01dia, coin01th, coin01n],
-	[coin02dia, coin02th, coin02n],
-	[coin03dia, coin03th, coin03n],
-	[coin04dia, coin04th, coin04n],
-	[coin05dia, coin05th, coin05n],
-	[coin06dia, coin06th, coin06n],
-	[coin07dia, coin07th, coin07n],
-	[coin08dia, coin08th, coin08n],
-	[coin09dia, coin09th, coin09n],
-	[coin10dia, coin10th, coin10n]
+    [coin_01_dia, coin_01_th, coin_01_n],
+    [coin_02_dia, coin_02_th, coin_02_n],
+    [coin_03_dia, coin_03_th, coin_03_n],
+    [coin_04_dia, coin_04_th, coin_04_n],
+    [coin_05_dia, coin_05_th, coin_05_n],
+    [coin_06_dia, coin_06_th, coin_06_n],
+    [coin_07_dia, coin_07_th, coin_07_n],
+    [coin_08_dia, coin_08_th, coin_08_n],
+    [coin_09_dia, coin_09_th, coin_09_n],
+    [coin_10_dia, coin_10_th, coin_10_n]
 ];
 
-coins = currency >= 0 ?
-	[
-		allcoins[currency][1],
-		allcoins[currency][2],
-		allcoins[currency][3]
-	] : [
-		[for (i = othercoinsdt) if(i[0] > 0) i[0]],
-		[for (i = othercoinsdt) if(i[0] > 0) i[1]],
-		[for (i = othercoinsdt) if(i[0] > 0) i[2]]
-	];
+coins = currency>=0?
+    [
+        all_coins [currency][1], 
+        all_coins [currency][2], 
+        all_coins [currency][3]
+    ]
+:
+    [
+        [for (i=other_coins_d_t) if(i[0] > 0) i[0]],
+        [for (i=other_coins_d_t) if(i[0] > 0) i[1]],
+        [for (i=other_coins_d_t) if(i[0] > 0) i[2]]
+    ];
 
-echo(coins);
+coins_d = coins[0];
+coins_thickness = coins[1];
+coins_n = coins [2];
 
-num_coins = len(coins[0]);
+enable_box = (part == "all_assembled" || part == "all_unassembled" || part == "basebox");
+enable_top_board = (part == "all_assembled" || part == "all_unassembled" || part == "topboard");
+enable_tubes = (part == "all_assembled" || part == "all_unassembled" || part == "tubes") && (coin_roll_version == 1);
+enable_tuberack = (part == "all_assembled" || part == "all_unassembled" || part == "tuberack");
+enable_tuberack_scale = true;
+assembled = (part != "all_unassembled");
+lay_flat = (part != "all_assembled" && part != "all_unassembled");
 
-coin_diams = coins[0];
-coin_thicknesses = coins[1];
-coin_numbers = coins[2];
-
-coin_stack_sizes = [for(i = [0 : num_coins - 1]) coin_numbers[i] * coin_thicknesses[i]];
-
-enable_box = (part == "allassembled" || part == "allunassembled" || part == "basebox");
-enable_mesh = (pattern != "no" && pattern != "slim");
-enable_topboard = (part == "allassembled" || part == "allunassembled" || part == "topboard");
-enable_tube = (part == "allassembled" || part == "allunassembled" || part == "tubes") && (coin_roll_version == 1);
-enable_tube_rack = (part == "allassembled" || part == "allunassembled" || part == "tuberack");
-enable_tube_rack_scale = true;
-assembled = (part != "allunassembled");
-layflat = (part != "allassembled" && part != "allunassembled");
-
-// Thickness of back - side fill - in (if selected)
-minwallthickness = 0.3;
-
+// Thickness of back-side fill-in (if selected)
+min_wall_thickness = 0.3;
+        
 // Thickness of tube walls
-thtubewall = 0.5;
-
+th_tubewall = 0.5;
+        
 // Tolerance between tubes and tuberack
-toltuberack = 0.25;
+tol_tuberack = 0.25;
 
-guardcornerradius = 5;
+// Tolerance between topboard and box
+topfit_tol = 1;
 
-boardthickness = 2.0; // This also implies wall thickness
-boardleftpadding = 1;
-boardrightpadding = 1;
-boardprimaryslope = 16;
-boardsecondaryslope = 15;
-horizontalguardwidth = 3;
-coinpadding = 0.4;
-coinpaddingtopboard = 0.25;
-nozzlesize = 0.4;
-nozzlesizeupbound = 0.41;
+guard_corner_radius = 5;
 
-tuberackshorter = 5;
-tuberackfrontbackcut = 2;
-tuberackbasethickness = 4.0;
-tuberackbackthinner = 1;
-tuberackscaledepth = 0.4;
-tuberackscaleheight = 0.8;
-tuberackpadding = 0.5; // Applies to tuberack retaining ledge horizontally and vertically
-tuberackretainingledgeheight = tuberackbasethickness - tuberackpadding;
+sorter_min_height = height;
+board_thickness = 2.0; // This also implies wall thickness
+board_left_padding = 1;
+board_right_padding = 1;
+board_primary_slope = 16;
+board_secondary_slope = 15;
+horizontal_guard_width = 3;
+coin_padding = 0.4;
+coin_padding_top_board = 0.25;
 
-unassembledtopboardlift = 45;
-unassembledtuberacklift = 20;
-unassembledtubeslift = 40;
+tuberack_shorter = 5;
+tuberack_front_back_cut = 2;
+tuberack_base_thickness = 4.0;
+tuberack_back_thinner = 1;
+tuberack_scale_depth = 0.4;
+tuberack_scale_height = 0.8;
+tuberack_padding = 0.5; // Applies to tuberack retaining ledge horizontally and vertically
+tuberack_retaining_ledge_height = tuberack_base_thickness - tuberack_padding;
 
-topboardbigger = 1.6;
+
+unassembled_top_board_lift = 45;
+unassembled_tuberack_lift = 20;
+unassembled_tubes_lift = 40;
+
+// Tolerance for the topboard lower opening
+topboard_bigger = 1.6;
 
 $fa = 6;  // default: 12
 $fs = 1;  // default: 2
 
-coincount = len(coin_diams);
-coinmaxindex = coincount - 1;
+coin_count = len(coins_d);
+coin_max_index = coin_count - 1;
 
-boardlength = (boardleftpadding + boardrightpadding
-								+ sumcoinsd()
-								+ coinpadding * coincount * 2
-								+ boardthickness * (coincount + 3));
+board_length = (board_left_padding + board_right_padding
+                + sum_coins_d()
+                + coin_padding * coin_count * 2
+                + board_thickness * (coin_count + 3));
 
-boardwidth = coin_diams[0] + coinpadding + boardthickness * 3;
+board_width = coins_d[0] + coin_padding + board_thickness * 3;
 
-slopeheight = tan(boardsecondaryslope) * boardwidth + tan(boardprimaryslope) * boardlength;
+slope_height = tan(board_secondary_slope) * board_width
+               + tan(board_primary_slope) * board_length;
 
-slope_diffs = [
-	for(i = [0 : num_coins - 1]) coin_stack_sizes[i] - tan(boardprimaryslope) * coinleftx(i)
-];
-sorterminheight = max(slope_diffs);
+sorter_max_height = sorter_min_height + slope_height + board_thickness;
+echo("box length:", board_length);
+//echo("board_width:", board_width);
+echo("box min height:", sorter_min_height);
+echo("box max height:", sorter_max_height);
 
-sortermaxheight = sorterminheight + slopeheight + boardthickness;
-echo("box length:", boardlength);
-//echo("boardwidth:", boardwidth);
-echo("box min height:", sorterminheight);
-echo("box max height:", sortermaxheight);
-
-//projection (cut = true)
-translate ([0, 0, -80])
+*projection (cut = true)
+rotate ([0, 90, 0])
+translate ([-25, 0, 0])
 main();
 
-module main() {
-	topboardlift = assembled ? 0 : unassembledtopboardlift;
-	tuberacklift = assembled ? 0 : unassembledtuberacklift;
-	tubeslift = assembled ? 0 : unassembledtubeslift;
-	if (layflat) mainimplflat(topboardlift, tuberacklift, tubeslift);
-	else mainimpl(topboardlift, tuberacklift, tubeslift);
+main();
+
+module main() 
+{
+    top_board_lift = assembled ? 0 : unassembled_top_board_lift;
+    tuberack_lift = assembled ? 0 : unassembled_tuberack_lift;
+    tubes_lift = assembled ? 0 : unassembled_tubes_lift;
+    
+    if (lay_flat)
+        main_impl_flat(top_board_lift, tuberack_lift, tubes_lift);
+    else
+        main_impl(top_board_lift, tuberack_lift, tubes_lift);
 }
 
-module mainimpl(topboardlift = 0, tuberacklift = 0, tubeslift = 0) {
-	if (enable_box) basebox();
-	if (enable_topboard) translate([0, 0, topboardlift]) topboard();
-	if (enable_tube_rack) translate([0, 0, tuberacklift]) tuberack();
-	if (enable_tube) translate([0, 0, tubeslift]) tubes();
+module main_impl (top_board_lift=0, tuberack_lift=0, tubes_lift=0) 
+{
+    if (enable_box)
+        base_box();
+  
+    if (enable_top_board) 
+        translate([0, 0, top_board_lift]) 
+        top_board();
+
+    if (enable_tuberack)
+        translate([0, 0, tuberack_lift]) 
+        tuberack();
+  
+    if (enable_tubes)
+       translate([0, 0, tubes_lift]) 
+        tubes();
 }
 
-module mainimplflat(topboardlift = 0, tuberacklift = 0, tubeslift = 0) {
-	if (enable_box) {
-		if (enable_mesh) rotate([-90, 0, 0]) basebox();
-		else basebox();
-	}
-	if (enable_topboard) {
-		translate([0, 0, topboardlift])
-		untransformtopboard(sorterminheight)
-		topboard();
-	}
-	if (enable_tube_rack) translate([0, 0, tuberacklift]) tuberack();
-	if (enable_tube) translate([0, 0, tubeslift]) tubes();
+module main_impl_flat(top_board_lift=0, tuberack_lift=0, tubes_lift=0) 
+{
+    if (enable_box)
+        base_box();
+
+    if (enable_top_board)
+        translate([0, 0, top_board_lift])
+        untransform_top_board(sorter_min_height)
+        top_board();
+
+    if (enable_tuberack)
+        translate([0, 0, tuberack_lift]) 
+        tuberack();
+    
+    if (enable_tubes) 
+        translate([0, 0, tubes_lift]) tubes();
 }
 
 //
@@ -751,210 +729,154 @@ module mainimplflat(topboardlift = 0, tuberacklift = 0, tubeslift = 0) {
 //
 
 // Component: the box.
-module basebox() {
-	render(convexity = 4) {
-		difference() {
-			union() boxempty();
-			if (enable_mesh) boardbackhollow(boardthickness * 1.5);
-		}
-	}
-
-	if (enable_mesh) {
-		intersection() {
-			boardbackmesh();
-			union() {
-				boardbackhollow();
-				boxbackfill();
-			}
-		}
-		// Closed backside
-		if (pattern_fill == "yes") {
-			translate([0, boxsize()[1], 0]) {
-				rotate([-90, 0, 0]) {
-					linear_extrude(minwallthickness, convexity = 2) {
-						projection(cut = false) {
-							rotate([90, 0, 0]) boxempty();
-						}
-					}
-				}
-			}
-		}
-	} else boxbackfill();
+module base_box(bigger = 0) 
+{
+    box_empty(bigger);
+    *box_back_fill(bigger * topfit_tol);
 }
 
-function boxsize(fatter = 0, thicker = 0, altitude = 0, fronter = 0, taller = 0) = [boardlength + fatter * 2 + thicker * 2, boardwidth + fatter * 2 + thicker * 2 + fronter, sortermaxheight + fatter * 2 + thicker * 2 + taller];
+function box_size(fatter=0, thicker=0, altitude=0, fronter=0, taller=0) =
+    [board_length + fatter * 2 + thicker * 2,
+     board_width + fatter * 2 + thicker * 2 + fronter,
+     sorter_max_height + fatter * 2 + thicker * 2 + taller];
 
-module boxmove(fatter = 0, thicker = 0, altitude = 0, fronter = 0, taller = 0) {
-	translate([-fatter - thicker, -fatter - thicker - fronter, altitude - fatter - thicker]) {
-		children();
-	}
+module box_move(fatter=0, thicker=0, altitude=0, fronter=0, taller=0) 
+{
+    translate([-fatter - thicker,
+               -fatter - thicker - fronter,
+               -fatter - thicker + altitude])
+    children();
 }
 
-module boxempty() {
-	size = boxsize();
-	cuttopside() {
-		difference () {
-			boxemptytall();
+module box_empty(bigger = 0)
+{
+    cut_top_side() 
+    {
+        difference ()
+        {
+            box_empty_tall(thicker = bigger * topfit_tol, inner = bigger * topfit_tol);
+            
+            // Back Cut-out
+            *translate ([4 * board_thickness, board_thickness + 0.01, board_thickness])
+            cube ([box_size () [0] - 8 * board_thickness - board_left_padding - board_right_padding, box_size () [1], box_size() [2]]);
+        }
 
-			translate([4 * boardthickness, boardthickness + 0.01, boardthickness]) {
-				cube([size[0] - 8 * boardthickness - boardleftpadding - boardrightpadding, size[1], size[2]]);
-			}
-		}
-
-		difference (){
-			translate([0, -boardthickness, 0])
-			cube([size[0], boardthickness + tuberackfrontcuty(), tuberackretainingledgeheight]);
-
-			linear_extrude(height = tuberackretainingledgeheight + 0.01, center = false, convexity = 2)
-			offset(tuberackpadding)
-			tuberackbase2();
-		}
-	}
+        // Front retaining ledge
+        difference ()
+        {
+            translate ([0, -board_thickness, 0])
+            cube ([box_size ()[0], board_thickness + tuberack_front_cut_y(), tuberack_retaining_ledge_height]);
+        
+            linear_extrude(height = tuberack_retaining_ledge_height + 0.01, center=false, convexity=2)
+            offset (tuberack_padding)
+            tuberack_base_2();
+        }
+        
+        // Rack footprint
+        difference ()
+        {
+            translate ([0, -board_thickness, 0])
+            cube ([box_size ().x, box_size ().y, tuberack_retaining_ledge_height]);
+        
+            linear_extrude(height = tuberack_retaining_ledge_height + 0.01, center=false, convexity=2)
+            offset (tuberack_padding)
+            tuberack_base_2();
+        }
+    }
 }
 
-module boxemptytall(fatter = 0, thicker = 0, altitude = 0) {
-	difference() {
-		boxoutersolidtall(fatter, thicker, altitude);
-		boxinnersolidtall(fatter, thicker, altitude);
-	}
+module box_empty_tall(fatter=0, thicker=0, altitude=0, inner=0) 
+// Fatter: Moves walls out
+// Thicker: Makes walls thicker while moving outside out like Fatter
+// Altitude: Moves everything up
+// Inner: Moves wall insides in
+{
+    difference() 
+    {
+        box_outer_solid_tall (fatter, thicker, altitude, inner = inner);
+        
+        box_inner_solid_tall (fatter - inner, thicker, altitude, inner = 0);
+    }
 }
 
-module boxoutersolidtall(fatter = 0, thicker = 0, altitude = 0, fronter = 0, taller = 0) {
-	boxmove(fatter, thicker, altitude, fronter, taller) {
-		cube(boxsize(fatter, thicker, altitude, fronter, taller));
-	}
+module box_outer_solid_tall(fatter=0, thicker=0, altitude=0, fronter=0, taller=0, inner = 0) 
+// Fatter: Moves walls out
+// Thicker: Makes walls thicker while moving outside out like Fatter
+// Altitude: Moves everything up
+// Fronter: Makes it bigger front-to-back
+// Taller: Makes it taller
+{
+    box_move (fatter - inner, thicker, altitude, fronter, taller) 
+    cube (box_size (fatter - inner, thicker, altitude, fronter, taller));
 }
 
-module boxinnersolidtall(fatter = 0, thicker = 0, altitude = 0) {
-	boxoutersolidtall(
-		fatter - boardthickness - thicker, thicker, altitude,
-		boardthickness + thicker + 0.1,
-		boardthickness + thicker + 0.1
-	);
+module box_inner_solid_tall(fatter=0, thicker=0, altitude=0, inner=0) 
+{
+    box_outer_solid_tall (fatter - board_thickness - thicker - inner, thicker, altitude, board_thickness + thicker + 0.1, board_thickness + thicker + 0.1);
 }
 
-module boardbackhollow(thicker = 0) {
-	xyz = boxsize(fatter = -boardthickness - thicker);
-	cuttopside(altitude = -thicker)
-	boxmove(fatter = -boardthickness - thicker)
-	translate([0, xyz[1] + thicker/2, 0]) {
-		cube([xyz[0], boardthickness + thicker, xyz[2]]);
-	}
+module board_back_hollow(thicker=0) 
+{
+    xyz = box_size(fatter = -board_thickness - thicker);
+    
+    cut_top_side(altitude = -thicker)
+    box_move(fatter = -board_thickness - thicker)
+    translate([0, xyz.y + thicker/2, 0])
+    cube([xyz.x, board_thickness + thicker, xyz.z]);
 }
 
-module boxbackfill(thicker = 0) {
-	cuttopside(altitude = -thicker) {
-		boxbackfilltall();
-	}
+module box_back_fill (thicker=0)
+{
+    cut_top_side(altitude = -thicker)
+    box_back_fill_tall(thicker);
 }
 
-module boxbackfilltall(wallonly = true) {
-	linear_extrude(height = sortermaxheight, center = false, convexity = 8) {
-		translate([0, coinpadding * 2]) {
-			if (wallonly) {
-				intersection() {
-					offset(boardthickness) {
-						difference() {
-							square([boxsize()[0], boxsize()[1] - boardthickness - coinpadding * 2 - 0.01]);
-
-							tuberackbackcontour();
-						}
-					}
-
-					tuberackbackcontour();
-				}
-			} else tuberackbackcontour();
-		}
-	}
+module box_back_fill_tall (thicker)
+{
+    linear_extrude(height=sorter_max_height, center=false, convexity=8)
+    offset (thicker)
+    translate([0, coin_padding * 2])
+    intersection ()
+    {
+        offset (board_thickness)
+        difference ()
+        {
+            square ([box_size() [0], box_size () [1] - board_thickness - coin_padding * 2 - 0.01]);
+            
+            tuberack_back_contour ();
+        }
+        
+        tuberack_back_contour ();
+    }
 }
 
-module tuberackbackcontour() {
-	difference() {
-		polygon(tuberackcutbackcomplete());
-		for (i = [0 : coinmaxindex]) coinholeplain(i);
-	}
+module tuberack_back_contour ()
+{
+    difference() 
+    {
+        polygon(tuberack_cut_back_complete());
+        for (i = [0 : coin_max_index])
+            coin_hole_plain(i);
+    }
 }
 
 // Transformation: cut the right, left, back and front side.
-module cutsides(fatter = 0, thicker = 0) {
-	intersection() {
-		union() children();
-		boxoutersolidtall(fatter, thicker, taller = sortermaxheight);
-	}
+module cut_sides(fatter=0, thicker=0) {
+  intersection() {
+    union() {
+      children();
+    }
+    box_outer_solid_tall(fatter, thicker, taller=sorter_max_height);
+  }
 }
 
-module cuttopside(fatter = 0, thicker = 0, altitude = 0) {
-	difference() {
-		union() children();
-		topside(sorterminheight + fatter + altitude);
-	}
-}
-
-//
-// MESH
-//
-
-module boardbackmesh() {
-	diaglen = sqrt(boardlength * boardlength + sortermaxheight * sortermaxheight);
-
-	if (pattern == "mesh") {
-		boardbackmeshgrids(
-			mesh_thickness, 15, ceil(diaglen / 15) + 1, 45,
-			[boardlength / 2, boardwidth * 0.7, sortermaxheight / 2],
-			"y", boardwidth
-		);
-	} else if (pattern == "chncoin") {
-		boardbackmeshancientcoins(
-			mesh_thickness, 18, ceil(diaglen / 18 / 2) + 2,
-			[boardlength / 2, boardwidth * 0.7, sortermaxheight / 2],
-			"y", boardwidth
-		);
-	}
-}
-
-module meshextrude(center = [0, 0, 0], normaldirection = "z", height = 10, convexity = 10) {
-	translate(center) {
-		rotate(normaldirection == "x" ? [0, 90, 0] : normaldirection == "y" ? [-90, 0, 0] : [0, 0, 0]) {
-			linear_extrude(height, center = true, convexity = convexity) {
-				children();
-			}
-		}
-	}
-}
-
-module boardbackmeshgrids(thickness, gap, count, rotateangle = 0, center = [0, 0, 0], normaldirection = "z", height = 10) {
-	length = (thickness + gap) * (count - 1) + thickness;
-	meshextrude(center, normaldirection, height, convexity = 8)
-	rotate([0, 0, rotateangle])
-	translate([-length / 2, -length / 2]) {
-		for (i = [0 : count - 1]) {
-			translate([(thickness + gap) * i, 0]) {
-				square([thickness, length]);
-			}
-			translate([0, (thickness + gap) * i]) {
-				square([length, thickness]);
-			}
-		}
-	}
-}
-
-module boardbackmeshancientcoins(thickness, radius, count, center = [0, 0, 0], normaldirection = "z", height = 10) {
-	meshextrude(center, normaldirection, height, convexity = 8) {
-		translate([-sqrt2 * radius * (count - 1) / 2, -sqrt2 * radius * (count - 1) / 2]) {
-			for (i = [0 : count - 1]) {
-				for (j = [0 : count - 1]) {
-					translate([sqrt2 * radius * i, sqrt2 * radius * j]) {
-						render(convexity = 2) {
-							difference() {
-								circle(r = radius + thickness / 2);
-								circle(r = radius - thickness / 2);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+module cut_top_side(fatter=0, thicker=0, altitude=0) {
+  difference() {
+    union() {
+      children();
+    }
+    top_side(sorter_min_height + fatter + altitude);
+  }
 }
 
 //
@@ -962,175 +884,232 @@ module boardbackmeshancientcoins(thickness, radius, count, center = [0, 0, 0], n
 //
 
 // Component: the solid board on top (topboard)
-
-module topboard() {
-  difference() 
+module top_board() 
+{
+    transform_top_board (sorter_min_height - topboard_rim + board_thickness + 0.01)
+    difference ()
     {
-    // the board itself
-    union ()
-    {
-        topboard_blank ();
-
+        untransform_top_board (sorter_min_height - topboard_rim + board_thickness + 0.01)
+        top_board_railed ();
+        
+        translate ([0, 0, -0.02])
         difference ()
         {
-
-            translate ([0, 0, -topboard_rim + boardthickness - 0.01])
+            linear_extrude (1)
+            offset (1)
+            topboard_lower_section ();
+            
             hull ()
-            for (i = [0:1])
-                translate ([0, 0, i * topboard_rim])
-                transformtopboard(sorterminheight)
+            {
+                translate ([0, 0, 1])
                 linear_extrude (0.01)
-                offset (topboardrimwidth)
-                square ([(boxsize() [0] + extra_topboard_length) / cos (boardprimaryslope), boxsize () [1]]);
-
-            difference() {
-                topboardbottomcutout ();
-
-                coinmaxindex = coincount - 1;
-
-                for (i = [0 : coinmaxindex - 1]) {
-                    translate([coinleftx(i) + coin_diams[i], -10, sorterminheight - topboard_rim])
-                        cube([2 * coinpadding + boardthickness, 10 + tuberackfrontcuty(), sortermaxheight]);
-                }
+                topboard_lower_section ();
+                
+                translate ([0, 0, -0.01])
+                linear_extrude (0.01)
+                offset (-1)
+                topboard_lower_section ();
             }
-            transformtopboard(sorterminheight)
-                translate([0.5 * coin_diams[0], -0.5, -topboard_rim + boardthickness])
-                    rotate([-45, 0, 0])
-                        cube([coinleftx(coinmaxindex), topboard_rim - boardthickness, topboard_rim - boardthickness]);
+        }
+    }
+}
+
+module topboard_lower_section ()
+{
+    hull ()
+    scale ([1, 1.01])   // This should not be necessary :shrug:
+    projection (cut = true)
+    untransform_top_board (sorter_min_height - topboard_rim + board_thickness)
+    top_board_railed ();
+}
+
+// Component: the solid board on top (topboard)
+
+module top_board_railed () 
+{
+    difference() 
+    {
+        top_board_blank ();
+        
+        translate ([0, 0, -board_thickness])
+        topboard_bottom_cutout ();
+    
+        // holes and cuts
+        for (i = [0 : coin_max_index]) 
+        {
+            coin_hole(i, bigger_r=coin_padding_top_board-coin_padding);
+            
+            slope_cut_for_coin(i, bigger_r=coin_padding_top_board-coin_padding);
         }
     }
 
-    // holes and cuts
-    for (i = [0 : coinmaxindex]) 
+    // Vertical Guards
+    difference ()
     {
-        coinhole(i, biggerr=coinpaddingtopboard-coinpadding);
-
-        slopecutforcoin(i, biggerr=coinpaddingtopboard-coinpadding);
+        union ()
+        {
+            vertical_guard();
+          
+            if (guard_style == "Front_and_back")
+                transform_top_board(0)
+                translate ([0, board_width, 0])
+                untransform_top_board(0)
+                vertical_guard();
+        }
+        
+        // cut away unwanted lower half of vertical guards
+        translate ([0, 0, -board_thickness])
+        hull ()
+        {
+            top_board_blank (); 
+            
+            translate ([0, 0, -sorter_max_height])
+            top_board_blank (); 
+        }
     }
-  }
-
-  difference ()
-  {
-    union ()
-    {
-        verticalguard();
-
-        if (guardstyle == "Frontandback")
-            transformtopboard(0)
-            translate ([0, boardwidth, 0])
-            untransformtopboard(0)
-            verticalguard();
-    }
-    topboardbottomcutout ();
-  }
-  horizontalguard();
+  
+    // Horizontal Guard
+    horizontal_guard();
 }
 
-module topboard_blank ()
+// The board itself
+module top_board_blank ()
 {
-    cutsides()
-    transformtopboard(sorterminheight)
-    cube([boardlength*2, boardwidth*2, boardthickness]);
+    translate ([0, 0, -topboard_rim + board_thickness - 0.01])
+    hull ()
+    for (i = [0, 1])
+        translate ([0, 0, i * topboard_rim])
+        transform_top_board(sorter_min_height)
+        linear_extrude (0.01)
+        offset (topboard_rimwidth)
+        projection (cut = true)
+        untransform_top_board(0)
+        scale ([extra_topboard_length/box_size ().x + 1, 1, 1])
+        box_outer_solid_tall ();
+    
+    // Old fawlty stuff
+    *difference ()
+    {
+        translate ([0, 0, -topboard_rim + board_thickness - 0.01])
+        hull ()
+        for (i = [0:1])
+            translate ([0, 0, i * topboard_rim])
+            transform_top_board(sorter_min_height)
+            linear_extrude (0.01)
+            offset (topboard_rimwidth)
+            square ([(box_size() [0] + extra_topboard_length) / cos (board_primary_slope), box_size () [1]]);
+    }
 }
 
-// Negative component: Basebox - sized hole in topboard bottom
-module topboardbottomcutout() {
-	size = boxsize();
-	translate ([-topboardbigger / 2, -topboardbigger / 2, 0.01]) {
-		resize ([size[0] + topboardbigger, size[1] + topboardbigger, size[2]]) {
-			hull() basebox();
-		}
-	}
+// Negative component: Basebox-sized hole in topboard bottom
+module topboard_bottom_cutout ()
+{
+    translate ([-topboard_bigger/2, -topboard_bigger/2, 0.01])
+    resize ([box_size ()[0] + topboard_bigger, box_size ()[1] + topboard_bigger, box_size ()[2]])
+    //hull ()
+    {
+        base_box (1);
+    }
 }
 
 // Component: the guard on top of the top board.
-module verticalguard() {
-	intersection() {
-		translate([0, 0, -2 * guardcornerradius]) {
-			rotate([-90, 0, 0]) {
-				linear_extrude(boardthickness) {
-					offset(guardcornerradius) {
-						offset(-guardcornerradius) {
-							projection(cut = false) {
-								rotate([90, 0, 0]) {
-									difference() {
-										intersection() {
-											cube([boardlength + extra_topboard_length, boardthickness, sortermaxheight * 2]);
+module vertical_guard() 
+{
+    intersection() 
+    {
+        translate ([0, 0, -2 * guard_corner_radius])
+        rotate ([-90, 0, 0])
+        linear_extrude (board_thickness)
+        offset (guard_corner_radius)
+        offset (-guard_corner_radius)
+        projection (cut = false)
+        rotate ([90, 0, 0])
+        difference() 
+        {
+            intersection() 
+            {
+                cube([board_length + extra_topboard_length, board_thickness, sorter_max_height * 2]);
+                
+                top_side(sorter_min_height + board_thickness - 0.1);
+            }
 
-											topside(sorterminheight + boardthickness - 0.1);
-										}
-
-										translate([0, 0, 10]) topverticalguard(sorterminheight + boardthickness * 2, extra_guard_height);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+            translate ([0, 0, topboard_rim + board_thickness + normal_guard_height])
+            top_vertical_guard (sorter_min_height + board_thickness * 2, extra_guard_height);
+        }
+        
+        // Something
+    }
 }
 
 // Component: the guard crossing the holes.
-module horizontalguard() {
-	// should be similar to topboard()
-	cutsides() {
-		transformtopboard(sorterminheight) {
-			cube([boardlength * 2, horizontalguardwidth + boardthickness, boardthickness]);
-		}
-	}
+module horizontal_guard() 
+{
+    // should be similar to top_board()
+    cut_sides()
+    transform_top_board(sorter_min_height)
+    cube([board_length*2,
+          horizontal_guard_width + board_thickness,
+          board_thickness]);
 }
 
 // Submodule: the upper solid box that is rotated the same as the top board.
-module topside(altitude = 0) {
-	// rotate it and raise it
-	transformtopboard(altitude) {
-		// a big box
-		translate([-boardlength / 2, -boardwidth / 5, 0]) {
-			cube([boardlength * 2, boardwidth * 2, sortermaxheight]);
-		}
-	}
+module top_side(altitude = 0) 
+{
+    // rotate it and raise it
+    transform_top_board(altitude) 
+    {
+        // a big box
+        translate([-board_length/2, -board_width/5, 0])
+        cube([board_length*2, board_width*2, sorter_max_height]);
+    }
 }
 
 // Submodule: the vertical guard cutter that is rotated the same as the top board.
-module topverticalguard(altitude = 0, righthandaltitude = 0) {
-	// rotate it and raise it
-	transformtopboard(altitude) {
-		// a big box
-		translate([0, -boardwidth / 5, 0]) {
-			hull() {
-				cube([0.01, boardwidth * 2, sortermaxheight]);
-
-				translate([0.8 * boardlength, 0, 0])
-				cube([0.01, boardwidth * 2, sortermaxheight]);
-			}
-			hull() {
-				translate([0.8 * boardlength, 0, 0])
-				cube([0.01, boardwidth * 2, sortermaxheight]);
-
-				translate([2 * (boardlength + extra_topboard_length), 0, 2 * righthandaltitude])
-				cube([0.01, boardwidth * 2, sortermaxheight]);
-			}
-		}
-	}
+module top_vertical_guard(altitude = 0, right_hand_altitude = 0) 
+{
+    // rotate it and raise it
+    transform_top_board(altitude) 
+    {
+        // a big box
+        translate([0, -board_width/5, 0])
+        {
+            // Low guard
+            hull () 
+            {
+                cube([0.01, board_width * 2, sorter_max_height]);
+            
+                translate([0.8 * board_length, 0, 0])
+                cube([0.01, board_width * 2, sorter_max_height]);
+            }
+            
+            // Raised guard
+            hull () 
+            {
+                translate([0.8 * board_length, 0, 0])
+                cube([0.01, board_width * 2, sorter_max_height]);
+            
+                translate([2 * (extra_topboard_length + board_length), 0, 2 * right_hand_altitude])
+                cube([0.01, board_width * 2, sorter_max_height]);
+            }
+        }
+    }
 }
 
 // Transformation: do the rotation.
-module transformtopboard(liftz = 0) {
-	translate([0, 0, liftz]) {
-		rotate(a = boardsecondaryslope, v = [1, 0, tan(boardprimaryslope)]) {
-			rotate([0, -boardprimaryslope, 0]) children();
-		}
-	}
+module transform_top_board(lift_z=0) 
+{
+    translate([0, 0, lift_z]) 
+    rotate(a=board_secondary_slope, v=[1, 0, tan(board_primary_slope)])
+    rotate([0, -board_primary_slope, 0])
+    children();
 }
 
-module untransformtopboard(liftz = 0) {
-	rotate([0, boardprimaryslope, 0]) {
-		rotate(a = -boardsecondaryslope, v = [1, 0, tan(boardprimaryslope)]) {
-			translate([0, 0, -liftz]) children();
-		}
-	}
+module untransform_top_board(lift_z=0) 
+{
+    rotate([0, board_primary_slope, 0])
+    rotate(a=-board_secondary_slope, v=[1, 0, tan(board_primary_slope)])
+    translate([0, 0, -lift_z])
+    children();
 }
 
 //
@@ -1138,53 +1117,56 @@ module untransformtopboard(liftz = 0) {
 //
 
 // Submodule: the coin holes.
-module coinhole(n, biggerr = 0) {
-	translate([coincenterx(n), coincentery(n), boardthickness + 0.1]) {
-		cylinder(h = sortermaxheight, r = coin_diams[n] / 2 + coinpadding + biggerr);
-	}
+module coin_hole(n, bigger_r=0) 
+{
+    translate([coin_center_x(n), coin_center_y(n), board_thickness+0.1])
+    cylinder(h = sorter_max_height, r = coins_d[n] / 2 + coin_padding + bigger_r);
 }
 
-// Submodule: the coin holes, in a plain.
-module coinholeplain(n) {
-	translate([coincenterx(n), coincentery(n)]) {
-		circle(coin_diams[n] / 2 + coinpadding);
-	}
+// Submodule: the coin holes, in a plane
+module coin_hole_plain(n) 
+{
+    translate([coin_center_x(n), coin_center_y(n)])
+    circle(coins_d[n] / 2 + coin_padding);
 }
 
-// Submodule: the solid tube, in a plain.
-module coinholeplainthicker(n) {
-	translate([coincenterx(n), coincentery(n)]) {
-		circle(coin_diams[n] / 2 + coinpadding + boardthickness);
-	}
+// Submodule: the solid tube, in a plane
+module coin_hole_plain_thicker(n) 
+{
+    translate([coin_center_x(n), coin_center_y(n)])
+    circle(coins_d[n] / 2 + coin_padding + board_thickness);
 }
 
-// Submodule: the slope cuts.
-module slopecutforcoin(n, biggerr = 0) {
-	render(convexity = 2) {
-		intersection() {
-			// the (too big) actual slope cut
-			transformtopboard(sorterminheight) {
-				a = boardprimaryslope;
-				th = boardthickness;
-				cutlength = coin_diams[n] * 1.5;
-				movex = coinleftx(n + 1) - cutlength;
-				cutlengthrotated = cutlength / cos(a);
-				movexrotated = movex / cos(a) + th * tan(a) + 1;
+// Submodule: the slope cuts on top of the topboard
+module slope_cut_for_coin(n, bigger_r=0) 
+{
+    render(convexity=2) 
+    {
+        intersection() 
+        {
+            // the (too big) actual slope cut
+            transform_top_board(sorter_min_height) 
+            {
+                a = board_primary_slope;
+                th = board_thickness;
+                cut_length = coins_d[n] * 1.5;
+                move_x = coin_left_x(n+1) - cut_length;
+                cut_length_rotated = cut_length / cos(a);
+                move_x_rotated = move_x / cos(a) + th * tan(a) + 1;
 
-				translate([movexrotated, 0, 0]) {  // move rightwards
-					// make a triangle - box
-					rotate([0, -atan(th / cutlengthrotated), 0]) {
-						cube([cutlengthrotated * 2, boardwidth, th * 2]);
-					}
-				}  // translate, move rightwards
-			}  // transformtopboard
+                translate([move_x_rotated, 0, 0])   // move rightwards
+                // make a triangle-box
+                rotate([0, -atan(th / cut_length_rotated), 0])
+                cube([cut_length_rotated * 2, board_width, th * 2]);
+            }
 
-			// limiting box
-			translate([coincenterx(n), 1, 0]) {
-				cube([coin_diams[0], cointopy(n) - 1 + biggerr, sortermaxheight]);
-			}
-		}
-	}
+            // limiting box
+            translate([coin_center_x(n), 1, 0])
+            cube([coins_d[0],
+                  coin_top_y(n) - 1 + bigger_r,
+                  sorter_max_height]);
+        }
+    }
 }
 
 //
@@ -1192,78 +1174,87 @@ module slopecutforcoin(n, biggerr = 0) {
 //
 
 // Component: the tuberack.
-module tuberack() {
-	linear_extrude(height = tuberackbasethickness + 0.01, center = false, convexity = 2) {
-		tuberackbase2();
-	}
-
-	difference() {
-		translate([0, 0, tuberackbasethickness])
-		tuberackbody3();
-
-		if (enable_tube_rack_scale) {
-			translate([0, 0, tuberackbasethickness + 1.5]) { // +1.5 compensates for tube bottom thickness
-				tuberackscales();
-			}
-		}
-
-		translate([0, -1, sorterminheight - tuberackshorter]) {
-			rotate([0, -boardprimaryslope, 0]) {
-				cube([boardlength * 2, boardwidth * 2, sortermaxheight]);
-			}
-		}
-	}
+module tuberack(bigger = 0) 
+{
+    linear_extrude(height=tuberack_base_thickness+0.01, center=false, convexity=2)
+    offset (bigger)
+    tuberack_base_2();
+    
+    difference() 
+    {
+        translate([0, 0, tuberack_base_thickness]) 
+        tuberack_body_3(bigger);
+        
+        if (enable_tuberack_scale) 
+            translate([0, 0, tuberack_base_thickness + 1.5]) // +1.5 compensates for tube bottom thickness
+            tuberack_scales();
+        
+        translate([0, -1, sorter_min_height - tuberack_shorter]) 
+        rotate([0, -board_primary_slope, 0]) 
+        cube([board_length * 2, board_width * 2, sorter_max_height]);
+    }
 }
 
 // Submodule: the "last coins" and the tube connecting part.
-module tuberackbase2() {
-	offset(roundoffset) offset(-roundoffset) {
-		polygon(
-			concat(
-				[
-					[tuberackcutxx(0)[0], tuberackfrontcuty()],
-					[tuberackleftx(), tuberackfronty()],
-					[tuberackleftx() + tuberackbackthinner, tuberackbacky()]
-				],
-				tuberackcutbackxys(),
-				[
-					[tuberackrightx() - tuberackbackthinner, tuberackbacky()],
-					[tuberackrightx(), tuberackfronty()],
-					[tuberackcutxx(coinmaxindex)[1], tuberackfrontcuty()]
-				]
-			)
-		);
-	}
+module tuberack_base_2() 
+{
+  polygon(concat(
+      [[tuberack_cut_x_x(0)[0], tuberack_front_cut_y()],
+       [tuberack_left_x(), tuberack_front_y()],
+       [tuberack_left_x()+tuberack_back_thinner, tuberack_back_y()]],
+      tuberack_cut_back_xys(),
+      [[tuberack_right_x()-tuberack_back_thinner, tuberack_back_y()],
+       [tuberack_right_x(), tuberack_front_y()],
+       [tuberack_cut_x_x(coin_max_index)[1], tuberack_front_cut_y()]]));
 }
 
 // Submodule: the tube connecting part subtracted by coin holes.
-module tuberackbase3() {
-	difference() {
-		tuberackbase2();
-		for (i = [0 : coinmaxindex]) {
-			if (coin_roll_version == 1) {
-				offset (thtubewall + toltuberack) coinholeplain(i);
-			} else coinholeplain(i);
-		}
-	}
+module tuberack_base_3() 
+{
+    difference() 
+    {
+        tuberack_base_2();
+        for (i = [0 : coin_max_index])
+            if (coin_roll_version == 1)
+                offset (th_tubewall + tol_tuberack)
+                coin_hole_plain(i);
+            else
+                coin_hole_plain(i);
+    }
 }
 
-module tuberackbody3() {
-	linear_extrude(height = sortermaxheight, center = false, convexity = 2) tuberackbase3();
+module tuberack_body_3(bigger = 0) 
+{
+    linear_extrude(height=sorter_max_height, center=false, convexity=2)
+    offset (bigger)
+    tuberack_base_3();
 }
 
-module tuberackscales() {
-	for (i = [0 : coinmaxindex]) {
-		render(convexity = 2) {
-			interval = (coin_thicknesses[i] > 1.5 ? 1 : 2);
-			for (j = [interval : interval : sortermaxheight/coin_thicknesses[i]]) {
-				translate([coincenterx(i), tuberackfrontcuty() - 1, j * coin_thicknesses[i] - tuberackscaleheight / 2]) {
-					lengthoffset = (j % 10 == 0 ? 3 : j % 2 == 0 ? 1 : -0.5);
-					cube([tuberackcuthalfwidth(i) + lengthoffset, tuberackscaledepth + 1, tuberackscaleheight]);
-				}
-			}
-		}
-	}
+module tuberack_scales()
+{
+    for (i = [0 : coin_max_index]) 
+    {
+        render(convexity=2) 
+        {
+            interval = (coins_thickness[i] > 1.5 ? 1 : 2);
+            
+            for (j = [interval : interval : sorter_max_height/coins_thickness[i]]) 
+            {
+                translate([
+                    coin_center_x(i),
+                    tuberack_front_cut_y() - 1,
+                    j * coins_thickness[i] - tuberack_scale_height / 2
+                ]) 
+                {
+                    length_offset = (j%10==0 ? 3 : j%2==0 ? 1 : -0.5);
+                    
+                    cube([tuberack_cut_half_width(i) + length_offset,
+                          tuberack_scale_depth + 1,
+                          tuberack_scale_height]);
+                }
+            }
+        }
+    }
 }
 
 //
@@ -1271,65 +1262,79 @@ module tuberackscales() {
 //
 
 // Component: the tubes
-module tubes() {
-	translate([0, 0, tuberackbasethickness]) {
-		for (i = [0 : coinmaxindex]) {
-			color("green") {
-				cointube (i);
-			}
-		}
-	}
+module tubes() 
+{
+    translate([0, 0, tuberack_base_thickness])
+    for (i = [0 : coin_max_index])
+        color ("green")
+        coin_tube (i); 
 }
 
 // Submodule: the coin tube
-module cointube(n) {
-	translate([coincenterx(n), coincentery(n)]) {
-		difference() {
-			makecointube(coin_diams[n] + 2 * coinpadding, coin_thicknesses[n], coin_numbers[n]);
-
-			translate([0, 0, -0.01]) {
-				ndie(n + 1, 0.8 * (coin_diams[n] / 2 - 2) / sqrt2);
-			}
-		}
-	}
+module coin_tube (n) 
+{
+    translate([coin_center_x(n), coin_center_y(n)])
+    difference ()
+    {
+        make_coin_tube (coins_d[n] + 2 * coin_padding, coins_thickness [n], coins_n [n]);
+        
+        translate ([0, 0, -0.01])
+        n_die (n + 1, 0.8  * 1/sqrt (2) * (coins_d [n]/2 - 2));
+    }
 }
 
 cylinders = [[0], [5], [1, 9], [1, 5, 9], [1, 3, 7, 9], [1, 3, 5, 7, 9], [1, 3, 4, 6, 7, 9], [1, 3, 4, 5, 6, 7, 9], [1, 2, 3, 4, 6, 7, 8, 9], [1, 2, 3, 4, 5, 6, 7, 8, 9]];
-
+    
 dots = [[0, 0], [-1, -1], [0, -1], [1, -1], [-1, 0], [0, 0], [1, 0], [-1, 1], [0, 1], [1, 1]];
 
-module ndie(n, r) {
-	if (n > 0 && n < 10) {
-		for (i = cylinders [n]) {
-			translate(r * dots [i]) {
-				cylinder(d = 2, h = 1);
-			}
-		}
-	} else if (n == 10) {
-		for (i = [1, -1]) {
-			translate([i * r / sqrt2, i * r / sqrt2]) {
-				ndie(5, r / 2);
-			}
-		}
-	}
+module n_die (n, r)
+{
+    if (n > 0 && n < 10)
+        for (i = cylinders [n])
+            translate (r * dots [i])
+            cylinder (d = 2, h = 1);
+    else if (n == 10)
+        for (i = [1, -1])
+            translate ([i * r/2 * sqrt (2), i * r/2 * sqrt (2)])
+            n_die (5, r/2);
 }
 
-module makecointube (dcoin, hcoin, ncoins) {
-	translate([0, 0, 1]) {
-		difference() {
-			hull() {
-				translate([0, 0, -1]) {
-					cylinder(d = dcoin, h = 0.5 + (ncoins + 0.5) * hcoin);
-
-					cylinder(d = 2 * thtubewall + dcoin, h = 0.5 + (ncoins + 0.5) * hcoin);
-				}
-			}
-
-			translate([0, 0, 0.5]) {
-				cylinder(d = dcoin, h = 0.5 + (ncoins + 0.5) * hcoin + 0.01);
-			}
-		}
-	}
+module make_coin_tube (d_coin, h_coin, n_coins) 
+{
+    rotate ([0, 0, 45])
+    translate ([0, 0, 1])
+    difference () 
+    {
+        hull ()
+        {
+            translate ([0, 0, -1])
+            cylinder (d = d_coin, h = 0.5 + (n_coins + 0.5) * h_coin);
+            
+            cylinder (d = 2 * th_tubewall + d_coin, h = 0.5 + (n_coins + 0.5) * h_coin);
+        }
+        
+        translate ([0, 0, 0.5])
+        cylinder (d = d_coin, h = 0.5 + (n_coins + 0.5) * h_coin + 0.01);
+        
+        if (witness_holes)
+        {
+            nholes = floor((0.5 + (n_coins + 0.5) * h_coin)/d_coin);
+            hinc = (0.5 + (n_coins + 0.5) * h_coin) / nholes;
+            
+            for (i = [1:nholes])
+            {
+                translate ([0, 0, 0.5 + hinc/2 + (i - 1) * hinc])
+                rotate ([90, 0, 0])
+                cylinder (d = d_coin * 3/4, h = d_coin + 2 * th_tubewall, center = true, $fn = 4);
+                
+                if (i < nholes)
+                    translate ([0, 0, 0.5 + hinc + (i - 1) * hinc])
+                    rotate ([90, 0, 90])
+                    cylinder (d = d_coin * 3/4, h = d_coin + 2 * th_tubewall, center = true,$fn = 4);
+            }
+        }
+    }
+    
 }
 
 
@@ -1338,64 +1343,68 @@ module makecointube (dcoin, hcoin, ncoins) {
 //
 
 // Accumulated coins' diameters.
-function sumcoinsd(firstn = coincount) = firstn <= 0 ? 0 : coin_diams[firstn - 1] + sumcoinsd(firstn - 1);
+function sum_coins_d(first_n=coin_count) =
+  first_n <= 0 ? 0 :
+  coins_d[first_n - 1] + sum_coins_d(first_n - 1);
 
 // Coin positions.
-function coincenterx(n) = coinleftx(n) + coin_diams[n] / 2;
+function coin_center_x(n) =
+  coin_left_x(n) + coins_d[n] / 2;
 
-function coinleftx(n) = boardleftpadding + sumcoinsd(n) + coinpadding * (2 * n + 1) + boardthickness * (n + 2);
+function coin_left_x(n) =
+  board_left_padding + sum_coins_d(n)
+  + coin_padding * (2 * n + 1)
+  + board_thickness * (n + 2);
 
-function coincentery(n) = coin_diams[n] / 2 + coinpadding + boardthickness;
+function coin_center_y(n) =
+  coins_d[n] / 2 + coin_padding + board_thickness;
 
-function cointopy(n) = coincentery(n) + coin_diams[n] / 2 + coinpadding;
+function coin_top_y(n) =
+  coin_center_y(n) + coins_d[n] / 2 + coin_padding;
 
-function coinbottomy(n) = coincentery(n) - coin_diams[n] / 2 - coinpadding;
+function coin_bottom_y(n) =
+  coin_center_y(n) - coins_d[n] / 2 - coin_padding;
 
 // Tube cuts.
-function tuberackleftx() = boardthickness + coinpadding;
-function tuberackrightx() = boardlength - boardthickness - coinpadding;
-function tuberackfronty() = coinpadding;
-function tuberackbacky() = boardwidth - boardthickness - coinpadding;
-function tuberackfrontcuty() = coinbottomy(0) + tuberackfrontbackcut;
+function tuberack_left_x() = board_thickness + coin_padding;
+function tuberack_right_x() = board_length - board_thickness - coin_padding;
+function tuberack_front_y() = coin_padding;
+function tuberack_back_y() = board_width - board_thickness - coin_padding;
+function tuberack_front_cut_y() = coin_bottom_y(0) + tuberack_front_back_cut;
 
-function tuberackcuthalfwidth(n) = sqrt(pow(coin_diams[n] / 2 + coinpadding + boardthickness, 2) - pow(coin_diams[n] / 2 + coinpadding - tuberackfrontbackcut, 2));
+function tuberack_cut_half_width(n) =
+  sqrt(pow(coins_d[n] / 2 + coin_padding + board_thickness, 2)
+       - pow(coins_d[n] / 2 + coin_padding - tuberack_front_back_cut, 2));
 
-function tuberackcutxx(n) =
-	[
-		coincenterx(n) - tuberackcuthalfwidth(n),
-		coincenterx(n) + tuberackcuthalfwidth(n)
-	];
+function tuberack_cut_x_x(n) =
+  [coin_center_x(n) - tuberack_cut_half_width(n),
+   coin_center_x(n) + tuberack_cut_half_width(n)];
 
-function tuberackcutbackxyxy(n) =
-	[
-		[
-			coincenterx(n) - tuberackcuthalfwidth(n),
-			cointopy(n) - tuberackfrontbackcut
-		],
-		[
-			coincenterx(n) + tuberackcuthalfwidth(n),
-			cointopy(n) - tuberackfrontbackcut
-		]
-	];
+function tuberack_cut_back_xy_xy(n) =
+  [[coin_center_x(n) - tuberack_cut_half_width(n),
+    coin_top_y(n) - tuberack_front_back_cut],
+   [coin_center_x(n) + tuberack_cut_half_width(n),
+    coin_top_y(n) - tuberack_front_back_cut]];
 
-function tuberackcutbackxys(firstn = coincount) =
-	firstn <= 0 ? [] :
-	concat(tuberackcutbackxys(firstn - 1), tuberackcutbackxyxy(firstn - 1));
+function tuberack_cut_back_xys(first_n=coin_count) =
+  first_n <= 0 ? [] :
+  concat(tuberack_cut_back_xys(first_n - 1),
+         tuberack_cut_back_xy_xy(first_n - 1));
 
-function tuberackcutbackcomplete() =
-	concat([[tuberackleftx() + tuberackbackthinner, tuberackbacky()]],
-		tuberackcutbackxys(),
-		[[tuberackrightx() - tuberackbackthinner, tuberackbacky()]]
-	);
-
+function tuberack_cut_back_complete() =
+  concat([[tuberack_left_x()+tuberack_back_thinner, tuberack_back_y()]],
+         tuberack_cut_back_xys(),
+         [[tuberack_right_x()-tuberack_back_thinner, tuberack_back_y()]]);
+         
 // Tube connections.
-function tuberackheightat(x) =
-	sorterminheight - tuberackshorter - tuberackbasethickness + x * tan(boardprimaryslope);
+function tuberack_height_at(x) =
+  sorter_min_height - tuberack_shorter - tuberack_base_thickness
+  + x * tan(board_primary_slope);
 
-function tuberackxheightat(x, zdelta = 0) = [x, tuberackheightat(x) + zdelta];
+function tuberack_x_height_at(x, z_delta=0) =
+  [x, tuberack_height_at(x) + z_delta];
 
-function tuberackconnectionheight(n) =
-	sorterminheight - tuberackshorter - tuberackbasethickness + (
-		n == 0 ? 0:
-		coincenterx(n - 1) * tan(boardprimaryslope)
-	);
+function tuberack_connection_height(n) =
+  sorter_min_height - tuberack_shorter - tuberack_base_thickness + (
+    n == 0 ? 0:
+    coin_center_x(n-1) * tan(board_primary_slope));
